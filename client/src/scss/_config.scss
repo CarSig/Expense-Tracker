@@ -1,0 +1,155 @@
+$max-width: 1100px;
+
+.dark-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+// Margin & Padding
+$spaceamounts: (1, 2, 3, 4, 5);
+@each $space in $spaceamounts {
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+  .my-#{$space} {
+    margin: #{$space}rem 0;
+  }
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+  .py-#{$space} {
+    margin: #{$space}rem 0;
+  }
+}
+
+// set text color based on background contrast
+@function set-text-color($color) {
+  @if (lightness($color) > 60) {
+    @return #333;
+  } @else {
+    @return #fff;
+  }
+}
+
+// Set background & text color
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}
+
+@mixin set-theme($bg-color, $bg1-color, $primary-color, $secondary-color, $success-color, $danger-color) {
+  @include set-background($bg-color);
+  /* ---------Global---------*/
+  .a {
+    color: $primary-color;
+  }
+  .text-primary {
+    color: $primary-color;
+  }
+  /* ---------Transaction List---------*/
+  .transaction {
+    @include set-background($bg1-color);
+    &.plus {
+      border-left: solid 10px $success-color;
+    }
+    &.minus {
+      border-left: solid 10px $danger-color;
+    }
+  }
+
+  .balance {
+    border: solid 1px $primary-color;
+
+    @include set-background($bg1-color);
+  }
+  .incExp {
+    div {
+      @include set-background($bg1-color);
+
+      border: solid 1px $success-color;
+    }
+    .expense {
+      border-color: $danger-color;
+    }
+  }
+
+  .navbar {
+    border-bottom: solid 3px $primary-color;
+  }
+
+  .incExp {
+    .div {
+      border: solid 1px $success-color;
+    }
+    .expense {
+      border-color: $danger-color;
+    }
+  }
+  .dark-overlay {
+    background-color: $secondary-color;
+  }
+  .bg-navbar {
+    @include set-background($secondary-color);
+  }
+  .btn {
+    background: $light-color;
+    color: #333;
+    &.btn-primary {
+      @include set-background($primary-color);
+      &:hover {
+        background: lighten($primary-color, 7%);
+      }
+    }
+    &.btn-secondary {
+      @include set-background($secondary-color);
+      &:hover {
+        background: lighten($secondary-color, 7%);
+      }
+    }
+    &.btn-dark {
+      @include set-background($dark-color);
+      &:hover {
+        background: lighten($dark-color, 7%);
+      }
+    }
+    &.btn-success {
+      @include set-background($success-color);
+      &:hover {
+        background: lighten($success-color, 7%);
+      }
+    }
+    &.btn-danger {
+      @include set-background($danger-color);
+      &:hover {
+        background: lighten($danger-color, 7%);
+      }
+    }
+    &:hover {
+      background: lighten($dark-color, 40%);
+      color: #fff;
+    }
+  }
+  /* ---------Add Expense Form---------*/
+  input,
+  select {
+    background-color: $bg1-color;
+  }
+  input[type="checkbox"] {
+    background: #fff;
+    border: 1px solid #ccc;
+    background-color: $bg1-color;
+    &:after {
+      color: white;
+    }
+    &:hover {
+      background-color: $bg-color;
+    }
+    &:checked {
+      background-color: $primary-color;
+    }
+  }
+}

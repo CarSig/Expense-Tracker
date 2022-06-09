@@ -1,0 +1,72 @@
+$background-color: #fff;
+$primary-color: #17a2b8;
+$secondary-color: rgba(0, 0, 0, 0.7);
+$dark-color: #343a40;
+$light-color: #f4f4f4;
+$danger-color: #dc3545;
+$success-color: #28a745;
+
+/* ---------Themes---------*/
+
+// filter link
+// https://codepen.io/sosuke/pen/Pjoqqp
+
+.dark {
+  @include set-theme(#333, #3f3f3f, $primary-color, rgba(0, 0, 0, 0.25), $success-color, #da5461);
+
+  select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%2317a2b8"/></svg>');
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(55%) sepia(34%) saturate(6581%) hue-rotate(155deg) brightness(96%) contrast(82%);
+  }
+}
+.light {
+  @include set-theme(#f7f7f7, #edf0f3, $primary-color, $secondary-color, $success-color, #da5461);
+  select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%2317a2b8"/></svg>');
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(55%) sepia(34%) saturate(6581%) hue-rotate(155deg) brightness(96%) contrast(82%);
+  }
+}
+.blue {
+  @include set-theme(#3049b9, #203591, #d1881b, $secondary-color, $success-color, #da5461);
+  select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23d1881b"/></svg>');
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(63%) sepia(43%) saturate(998%) hue-rotate(351deg) brightness(86%) contrast(88%);
+  }
+}
+
+.pink {
+  @include set-theme(#e788e7, #fdbefd, $primary-color, rgb(139, 26, 121), $success-color, rgb(156, 38, 58));
+  select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%2317a2b8"/></svg>');
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(55%) sepia(34%) saturate(6581%) hue-rotate(155deg) brightness(96%) contrast(82%);
+  }
+}
+
+.purpleYellow {
+  @include set-theme(#830d52, #f0f7b8, $primary-color, $secondary-color, $success-color, $danger-color);
+  select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%2317a2b8"/></svg>');
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(55%) sepia(34%) saturate(6581%) hue-rotate(155deg) brightness(96%) contrast(82%);
+  }
+}
+
+.test {
+  @include set-theme(#00796b, #ffa000, #212121, #ffa200, $success-color, $danger-color);
+  select {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23212121"/></svg>');
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(12%) sepia(0%) saturate(0%) hue-rotate(86deg) brightness(96%) contrast(97%);
+  }
+}

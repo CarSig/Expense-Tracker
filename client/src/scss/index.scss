@@ -1,0 +1,121 @@
+@import "config";
+@import "themes";
+@import "utilities";
+@import "form";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+a {
+  text-decoration: none;
+
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+  opacity: 0.9;
+  ul {
+    display: flex;
+  }
+  a {
+    color: #fff;
+    padding: 0.45rem;
+    margin: 0.25rem;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+main {
+  min-height: 100vh;
+}
+
+/* ---------Transaction List---------*/
+.transaction {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-evenly;
+
+  padding: 0.1rem;
+  border-radius: 1.5rem;
+
+  p {
+    margin-left: 3rem;
+    flex: 1;
+    flex-grow: 1;
+  }
+
+  button {
+    margin-right: 1rem;
+    border-radius: 3rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
+
+.period {
+  display: flex;
+
+  justify-content: space-around;
+
+  input[type="date"] {
+    display: block;
+    width: 120%;
+    padding: 1.3rem;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+}
+
+/* ---------Balance---------*/
+.balance {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem;
+  border: solid 1px $primary-color;
+  border-radius: 1.5rem;
+
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  span {
+    font-size: 1.5rem;
+  }
+}
+.incExp {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-around;
+  align-items: center;
+  span {
+    font-size: 1.2rem;
+  }
+  div {
+    padding: 2rem;
+
+    border-radius: 1.5rem;
+  }
+  .expense {
+    border-color: $danger-color;
+  }
+}
