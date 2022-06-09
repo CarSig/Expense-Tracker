@@ -15,6 +15,11 @@ export default (state, action) => {
         ...state,
         transactions: state.transactions.map((transaction) => (transaction._id === action.payload._id ? action.payload : transaction)),
       };
+    case "SET_FILTERS":
+      return {
+        ...state,
+        filters: action.payload,
+      };
 
     default:
       return state;

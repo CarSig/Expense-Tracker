@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import { set } from "mongoose";
+import React, { useState, useContext, useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
 import NavBar from "./components/NavBar";
@@ -13,20 +14,25 @@ function App() {
   const [theme, setTheme] = useState(themeStorage);
 
   const [counter, setCounter] = useState(0);
+  useEffect(() => {
+    setTheme(themes[counter]);
+    window.localStorage.setItem("theme", `${theme}`);
+  }, [counter]);
 
   const scrollTheme = (input) => {
     if (input === "up") {
       if (counter < themes.length - 1) {
         setCounter(counter + 1);
+      } else {
+        setCounter(0);
       }
     } else {
       if (counter > 0) {
         setCounter(counter - 1);
+      } else {
+        setCounter(themes.length - 1);
       }
     }
-    setTheme(themes[counter]);
-    window.localStorage.removeItem("theme");
-    window.localStorage.setItem("theme", `${theme}`);
   };
 
   return (

@@ -39,7 +39,6 @@ const AddExpense = () => {
       <a href="/" className="btn ">
         See transactions
       </a>
-      <TransactionList />
     </main>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
-
-export const useFilters = () => {
+const useFilters = () => {
   const { transactions } = useContext(GlobalContext);
   const [filters, setFilters] = useState({
     startDate: "",
@@ -35,3 +34,4 @@ export const useFilters = () => {
   };
   return [filters, handleChange, onSubmit, filteredTransactions];
 };
+export default useFilters;

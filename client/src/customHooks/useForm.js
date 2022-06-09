@@ -11,7 +11,7 @@ export const useForm = (initialValues) => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-
+  //TODO: remove id generating when connected to database
   const onSubmit = (e) => {
     e.preventDefault();
     const newTransaction = { ...values, _id: Math.floor(Math.random() * 100000000), amount: +values.amount };

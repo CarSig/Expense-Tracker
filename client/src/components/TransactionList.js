@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 
 import { GlobalContext } from "../context/GlobalState";
 import Balance from "./Balance";
+import Filters from "./Filters";
 import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
 
@@ -11,8 +12,8 @@ const TransactionList = () => {
   const [filters, setFilters] = useState({
     startDate: "",
     endDate: "",
-    amountLow: "",
-    amountHigh: "",
+    minAmount: "",
+    maxAmount: "",
     category: "",
     comment: "",
   });
@@ -22,18 +23,8 @@ const TransactionList = () => {
       <h2 className="large text-primary">History</h2>
       <Balance />
       <IncomeExpenses />
-      <div className="period">
-        <div>
-          {" "}
-          <label htmlFor="repeat">From</label>
-          <input type="date" name="date" placeholder="comment" defaultValue={"from"} className="my-1" />
-        </div>
-        <div>
-          {" "}
-          <label htmlFor="repeat">To</label>
-          <input type="date" name="date" placeholder="comment" defaultValue={"from"} className="my-1" />
-        </div>
-      </div>
+
+      <Filters></Filters>
       <div className="transactions">
         <ul>
           {transactions
@@ -52,16 +43,16 @@ const TransactionList = () => {
               return transaction;
             })
             .filter((transaction) => {
-              // filter by amountLow
-              if (filters.amountLow) {
-                return transaction.amount >= filters.amountLow;
+              // filter by minAmount
+              if (filters.minAmount) {
+                return transaction.amount >= filters.minAmount;
               }
               return transaction;
             })
             .filter((transaction) => {
-              // filter by amountHigh
-              if (filters.amountHigh) {
-                return transaction.amount <= filters.amountHigh;
+              // filter by maxAmount
+              if (filters.maxAmount) {
+                return transaction.amount <= filters.maxAmount;
               }
               return transaction;
             })
