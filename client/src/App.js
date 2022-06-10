@@ -10,13 +10,16 @@ const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
 function App() {
   const { transactions } = useContext(GlobalContext);
-  const themeStorage = localStorage.getItem("theme");
-  const [theme, setTheme] = useState(themeStorage);
+  let themeStorage = localStorage.getItem("theme");
 
-  const [counter, setCounter] = useState(0);
+  const [theme, setTheme] = useState(themeStorage || "light");
+
+  const [counter, setCounter] = useState(+localStorage.getItem("counter") || 0);
+
   useEffect(() => {
     setTheme(themes[counter]);
-    window.localStorage.setItem("theme", `${theme}`);
+
+    window.localStorage.setItem("theme", `${themes[counter]}`);
   }, [counter]);
 
   const scrollTheme = (input) => {
@@ -33,11 +36,13 @@ function App() {
         setCounter(themes.length - 1);
       }
     }
+    window.localStorage.setItem("counter", `${counter + 1}`);
   };
 
   return (
     <div className={`${theme} theme`}>
       <GlobalProvider>
+        <NavBar />
         <br />
         <br />
         <br />
@@ -59,8 +64,6 @@ function App() {
         >
           {"Next" || "--End--"}
         </div>
-
-        <NavBar />
 
         <BrowserRouter>
           <Routes>
