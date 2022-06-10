@@ -6,8 +6,22 @@ import Filters from "./Filters";
 import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
 
+import Pagination from "./Pagination";
+
 const TransactionList = () => {
   const { transactions } = useContext(GlobalContext);
+
+  //Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [transactionsPerPage] = useState(10);
+
+  // get current transactions
+  const indexOfLastTransaction = currentPage * transactionsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+  const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
+
+  // change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const [filters, setFilters] = useState({
     startDate: "",
@@ -27,7 +41,7 @@ const TransactionList = () => {
       <Filters></Filters>
       <div className="transactions">
         <ul>
-          {transactions
+          {currentTransactions
             .filter((transaction) => {
               // filter by startDate
               if (filters.startDate) {
@@ -81,6 +95,7 @@ const TransactionList = () => {
               return <Transaction key={transaction._id} transaction={transaction} />;
             })}
         </ul>
+        <Pagination transactionsPerPage={transactionsPerPage} totalTransactions={transactions.length} paginate={paginate} />
       </div>
 
       <a href="/add" className="btn btn-primary">

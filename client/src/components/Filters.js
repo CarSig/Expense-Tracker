@@ -1,41 +1,56 @@
 import React, { useContext, useState } from "react";
 
 const Filters = () => {
-  const [activeFilter, setActiveFilter] = useState({ date: false, amount: false, category: false, comment: false, repeating: false });
+  const [activeFilter, setActiveFilter] = useState({ date: false, amount: false, category: false, description: false, repeating: false });
 
-  const toggleFilter = (filter) => {
+  const toggleFilterActivity = (filter, e) => {
     setActiveFilter({ ...activeFilter, [filter]: !activeFilter[filter] });
   };
 
   return (
     <div className="container">
       <button
-        className="btn btn-primary"
+        className={`btn ${activeFilter.date ? "btn-primary" : "btn-secondary"}`}
         onClick={() => {
-          toggleFilter("date");
+          toggleFilterActivity("date");
         }}
       >
         Date
       </button>
       <button
-        className="btn btn-primary"
+        className={`btn ${activeFilter.amount ? "btn-primary" : "btn-secondary"}`}
         onClick={() => {
-          toggleFilter("amount");
+          toggleFilterActivity("amount");
         }}
       >
         Amount
       </button>
 
       <button
-        className="btn btn-primary"
+        className={`btn ${activeFilter.category ? "btn-primary" : "btn-secondary"}`}
         onClick={() => {
-          toggleFilter("category");
+          toggleFilterActivity("category");
         }}
       >
         Category
       </button>
-      <button className="btn btn-primary">Description</button>
-      <button className="btn btn-primary">Repeating</button>
+
+      <button
+        className={`btn ${activeFilter.description ? "btn-primary" : "btn-secondary"}`}
+        onClick={() => {
+          toggleFilterActivity("description");
+        }}
+      >
+        Description
+      </button>
+      <button
+        className={`btn ${activeFilter.repeating ? "btn-primary" : "btn-secondary"}`}
+        onClick={() => {
+          toggleFilterActivity("repeating");
+        }}
+      >
+        Repeating
+      </button>
       <form>
         {activeFilter.date && (
           <div className="filterWrapper">
@@ -65,18 +80,42 @@ const Filters = () => {
         {activeFilter.category && (
           <div className="categoryFilter filter">
             <label htmlFor="category">Category </label>
-            <input type="text" name="category" placeholder="category" className="my-1" />
+            <select name="category" id="category" value="select" className="my-1">
+              <option value="select" disabled hidden>
+                Select Category
+              </option>
+              <option value="food">Food</option>
+              <option value="pet">Pet</option>
+              <option value="Bars">Bars</option>
+              <option value="Travel">Travel</option>
+            </select>
           </div>
         )}
-        <div className="categoryFilter filter">
-          <label htmlFor="repeat">Comment </label>
-          <input type="text" name="category" placeholder="comment" className="my-1" />
-        </div>
-        <div className="repeatFilter">
-          <label htmlFor="repeat">Repeat</label>
-          <input type="checkbox" id="repeat" />
-        </div>
-        <div className="btn btn-primary">Submit</div>
+
+        {activeFilter.description && (
+          <div className="commentFilter filter">
+            <label htmlFor="repeat">Description </label>
+            <input type="text" name="comment" placeholder="comment" className="my-1" />
+          </div>
+        )}
+
+        {activeFilter.repeating && (
+          <div className="repeatFilter">
+            <label htmlFor="repeat">Repeat</label>
+            <input type="checkbox" id="repeat" />
+          </div>
+        )}
+
+        {
+          // if some filter is active, show button
+
+          Object.values(activeFilter).some((filter) => filter) && (
+            <div>
+              <br /> <button className="btn btn-primary">Filter</button>
+              <button className="btn ">Clear</button>
+            </div>
+          )
+        }
       </form>
     </div>
   );

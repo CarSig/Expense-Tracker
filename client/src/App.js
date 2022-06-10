@@ -10,15 +10,13 @@ const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
 function App() {
   const { transactions } = useContext(GlobalContext);
+
+  //THEME
   let themeStorage = localStorage.getItem("theme");
-
   const [theme, setTheme] = useState(themeStorage || "light");
-
   const [counter, setCounter] = useState(+localStorage.getItem("counter") || 0);
-
   useEffect(() => {
     setTheme(themes[counter]);
-
     window.localStorage.setItem("theme", `${themes[counter]}`);
   }, [counter]);
 
@@ -67,7 +65,14 @@ function App() {
 
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<TransactionList transactions={transactions} />} />
+            <Route
+              path="/"
+              element={
+                <div>
+                  <TransactionList />
+                </div>
+              }
+            />
 
             <Route path="/add" element={<AddExpense />} />
           </Routes>
