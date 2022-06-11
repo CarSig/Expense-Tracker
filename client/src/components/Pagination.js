@@ -7,9 +7,9 @@ const Pagination = ({ transactionsPerPage, totalTransactions, paginate }) => {
   }
   return (
     <div>
-      <ul style={{ display: "flex" }}>
+      <ul className="pagination" >
         {pageNumbers.map((number) => (
-          <li style={{ border: "1px solid black", margin: "0.5rem", padding: "0.5rem", background: "grey" }} key={number}>
+          <li style={{ }} key={number}>
             <div onClick={() => paginate(number)} href="!#">
               {number}
             </div>

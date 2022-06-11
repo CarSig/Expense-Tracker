@@ -119,3 +119,22 @@ main {
     border-color: $danger-color;
   }
 }
+
+.popup {
+  position: absolute;
+  padding: 1rem;
+}
+
+.pagination {
+  display: flex;
+  li {
+    border: 1px solid black;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none;
+}

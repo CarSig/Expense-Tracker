@@ -22,7 +22,7 @@ const TransactionList = () => {
 
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  const [hideFilters, setHideFilters] = useState(false);
   const [filters, setFilters] = useState({
     startDate: "",
     endDate: "",
@@ -37,8 +37,16 @@ const TransactionList = () => {
       <h2 className="large text-primary">History</h2>
       <Balance />
       <IncomeExpenses />
-
-      <Filters></Filters>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          setHideFilters(false);
+        }}
+        disabled={!hideFilters}
+      >
+        Show Filters
+      </button>
+      <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
       <div className="transactions">
         <ul>
           {currentTransactions

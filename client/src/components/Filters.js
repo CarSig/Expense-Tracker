@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-const Filters = () => {
+const Filters = ({ hideFilters, setHideFilters }) => {
   const [activeFilter, setActiveFilter] = useState({ date: false, amount: false, category: false, description: false, repeating: false });
 
   const toggleFilterActivity = (filter, e) => {
@@ -8,7 +8,7 @@ const Filters = () => {
   };
 
   return (
-    <div className="container">
+    <div className={`container popup ${hideFilters && "hidden"}`}>
       <button
         className={`btn ${activeFilter.date ? "btn-primary" : "btn-secondary"}`}
         onClick={() => {
@@ -54,7 +54,7 @@ const Filters = () => {
       <form>
         {activeFilter.date && (
           <div className="filterWrapper">
-            <div className="dateFilter">
+            <div className="dateFilter filter">
               <label htmlFor="repeat">From</label>
               <input type="date" name="startDate" placeholder="comment" defaultValue={"from"} className="my-1" />
             </div>
@@ -67,11 +67,11 @@ const Filters = () => {
 
         {activeFilter.amount && (
           <div className="filterWrapper">
-            <div className="amountFilter">
+            <div className="amountFilter filter">
               <label htmlFor="minAmount">Minimal amount</label>
               <input type="number" name="minAmount" placeholder="amount" defaultValue={"from"} className="my-1" />
             </div>
-            <div className="amountFilter ">
+            <div className="amountFilter filter">
               <label htmlFor="maxAmount">Maximal amount</label>
               <input type="number" name="maxAmount" placeholder="amount" className="my-1" />
             </div>
@@ -100,7 +100,7 @@ const Filters = () => {
         )}
 
         {activeFilter.repeating && (
-          <div className="repeatFilter">
+          <div className="repeatFilter ">
             <label htmlFor="repeat">Repeat</label>
             <input type="checkbox" id="repeat" />
           </div>
@@ -109,12 +109,11 @@ const Filters = () => {
         {
           // if some filter is active, show button
 
-          Object.values(activeFilter).some((filter) => filter) && (
-            <div>
-              <br /> <button className="btn btn-primary">Filter</button>
-              <button className="btn ">Clear</button>
-            </div>
-          )
+          <div>
+            <br /> <button className="btn btn-primary">Filter</button>
+            <button className="btn ">Clear</button>
+            <button className="btn btn-secondary"> Cancel</button>
+          </div>
         }
       </form>
     </div>

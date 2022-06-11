@@ -50,6 +50,15 @@ $spaceamounts: (1, 2, 3, 4, 5);
   .text-primary {
     color: $primary-color;
   }
+
+  .popup {
+    border: 2px solid $primary-color;
+    background-color: rgba(darken($bg-color, 6%), 0.95);
+    padding: 2rem;
+    border-radius: 1rem;
+    transform: translateX(30%) translateY(-60%);
+  }
+
   /* ---------Transaction List---------*/
   .transaction {
     @include set-background($bg1-color);
@@ -133,7 +142,7 @@ $spaceamounts: (1, 2, 3, 4, 5);
       color: #fff;
     }
   }
-  /* ---------Add Expense Form---------*/
+  /* --------- Form---------*/
   input,
   select {
     background-color: $bg1-color;
@@ -150,6 +159,11 @@ $spaceamounts: (1, 2, 3, 4, 5);
     }
     &:checked {
       background-color: $primary-color;
+    }
+  }
+  .pagination {
+    li {
+      background: $primary-color;
     }
   }
 }
