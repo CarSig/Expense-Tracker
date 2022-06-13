@@ -22,7 +22,7 @@ const TransactionList = () => {
 
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const [hideFilters, setHideFilters] = useState(false);
+  const [hideFilters, setHideFilters] = useState(true);
   const [filters, setFilters] = useState({
     startDate: "",
     endDate: "",
@@ -32,20 +32,21 @@ const TransactionList = () => {
     comment: "",
   });
 
+  const openFiltersWindow = (e) => {
+    e.preventDefault();
+    setHideFilters(false);
+  };
   return (
     <main className="container">
       <h2 className="large text-primary">History</h2>
       <Balance />
       <IncomeExpenses />
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          setHideFilters(false);
-        }}
-        disabled={!hideFilters}
-      >
+      <br />
+      <button className="btn btn-primary" onClick={openFiltersWindow}>
         Show Filters
       </button>
+      <br />
+      <br />
       <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
       <div className="transactions">
         <ul>
@@ -103,12 +104,8 @@ const TransactionList = () => {
               return <Transaction key={transaction._id} transaction={transaction} />;
             })}
         </ul>
-        <Pagination transactionsPerPage={transactionsPerPage} totalTransactions={transactions.length} paginate={paginate} />
+        <Pagination transactionsPerPage={transactionsPerPage} totalTransactions={transactions.length} paginate={paginate} currentPage={currentPage} />
       </div>
-
-      <a href="/add" className="btn btn-primary">
-        Add new transaction
-      </a>
     </main>
   );
 };

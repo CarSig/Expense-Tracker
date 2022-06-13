@@ -7,6 +7,10 @@ const Filters = ({ hideFilters, setHideFilters }) => {
     setActiveFilter({ ...activeFilter, [filter]: !activeFilter[filter] });
   };
 
+  const closeFiltersWindow = (e) => {
+    e.preventDefault();
+    setHideFilters(true);
+  };
   return (
     <div className={`container popup ${hideFilters && "hidden"}`}>
       <button
@@ -112,7 +116,10 @@ const Filters = ({ hideFilters, setHideFilters }) => {
           <div>
             <br /> <button className="btn btn-primary">Filter</button>
             <button className="btn ">Clear</button>
-            <button className="btn btn-secondary"> Cancel</button>
+            <button className="btn btn-secondary" onClick={closeFiltersWindow}>
+              {" "}
+              Cancel
+            </button>
           </div>
         }
       </form>

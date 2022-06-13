@@ -163,6 +163,9 @@ $spaceamounts: (1, 2, 3, 4, 5);
   }
   .pagination {
     li {
+      background: $bg1-color;
+    }
+    .active {
       background: $primary-color;
     }
   }

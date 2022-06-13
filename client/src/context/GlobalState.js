@@ -36,6 +36,7 @@ export const GlobalProvider = ({ children }) => {
       type: "DELETE_TRANSACTION",
       payload: id,
     });
+    console.log(id);
   }
 
   function addTransaction(transaction) {
@@ -43,6 +44,7 @@ export const GlobalProvider = ({ children }) => {
       type: "ADD_TRANSACTION",
       payload: transaction,
     });
+    console.log(transaction);
   }
 
   function editTransaction(transaction) {

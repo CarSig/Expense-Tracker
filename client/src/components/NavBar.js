@@ -12,7 +12,16 @@ const NavBar = () => {
         </div>
         <ul>
           <li>
-            <a href="/">Go to Dashboard</a>
+            <a href="/add">Add new transaction</a>
+          </li>
+          <li>
+            <a href="/">Transactions</a>
+          </li>
+          <li>
+            <a href="/">Statistics</a>
+          </li>
+          <li>
+            <a href="/">Settings</a>
           </li>
           <li>
             <a href="login" color="default">
