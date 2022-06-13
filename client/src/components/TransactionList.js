@@ -9,15 +9,15 @@ import Transaction from "./Transaction";
 import Pagination from "./Pagination";
 
 const TransactionList = () => {
-  const { transactions } = useContext(GlobalContext);
+  const { transactions, filters } = useContext(GlobalContext);
+  //Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [transactionsPerPage] = useState(10);
 
   //sort transactions by date
   const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
   const sortedTransactions = transactions.sort(sortByDate);
 
-  //Pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const [transactionsPerPage] = useState(10);
   // get current transactions
   const indexOfLastTransaction = currentPage * transactionsPerPage;
   const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
@@ -27,14 +27,14 @@ const TransactionList = () => {
 
   //Filters
   const [hideFilters, setHideFilters] = useState(true);
-  const [filters, setFilters] = useState({
-    startDate: "",
-    endDate: "",
-    minAmount: "",
-    maxAmount: "",
-    category: "",
-    comment: "",
-  });
+  // const [filters, setFilters] = useState({
+  //   startDate: "",
+  //   endDate: "",
+  //   minAmount: "",
+  //   maxAmount: "",
+  //   category: "",
+  //   comment: "",
+  // });
 
   const openFiltersWindow = (e) => {
     e.preventDefault();
