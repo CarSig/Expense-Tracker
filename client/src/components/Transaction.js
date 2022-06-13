@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 
+import { AiOutlineDelete } from "react-icons/ai";
+// AiOutlineDelete;
+// AiFillDelete
 import { GlobalContext } from "../context/GlobalState";
 
 const Transaction = ({ transaction }) => {
@@ -14,10 +17,7 @@ const Transaction = ({ transaction }) => {
         </p>
         <p>{transaction.category}</p>
         <p>{transaction.date.toISOString().slice(0, 10)}</p>
-        <button className="btn btn-danger" onClick={() => deleteTransaction(transaction._id)}>
-          {" "}
-          x{" "}
-        </button>
+        <AiOutlineDelete className="delete" onClick={() => deleteTransaction(transaction._id)} />
       </div>
     </li>
   );
