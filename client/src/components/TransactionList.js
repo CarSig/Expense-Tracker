@@ -11,17 +11,21 @@ import Pagination from "./Pagination";
 const TransactionList = () => {
   const { transactions } = useContext(GlobalContext);
 
+  //sort transactions by date
+  const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
+  const sortedTransactions = transactions.sort(sortByDate);
+
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [transactionsPerPage] = useState(10);
-
   // get current transactions
   const indexOfLastTransaction = currentPage * transactionsPerPage;
   const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
-  const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
-
+  const currentTransactions = sortedTransactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  //Filters
   const [hideFilters, setHideFilters] = useState(true);
   const [filters, setFilters] = useState({
     startDate: "",

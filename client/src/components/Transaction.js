@@ -13,7 +13,7 @@ const Transaction = ({ transaction }) => {
           {sign} {Math.abs(transaction.amount)} €
         </p>
         <p>{transaction.category}</p>
-        <p>{transaction.date}</p>
+        <p>{transaction.date.toISOString().slice(0, 10)}</p>
         <button className="btn btn-danger" onClick={() => deleteTransaction(transaction._id)}>
           {" "}
           x{" "}

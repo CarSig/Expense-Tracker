@@ -5,7 +5,6 @@ import TransactionList from "./TransactionList";
 
 const AddExpense = () => {
   let formattedDate = new Date().toISOString().slice(0, 10);
-
   const [values, handleChange, onSubmit] = useForm({ amount: 0, category: "select", comment: "", date: formattedDate, _id: "" });
 
   return (
