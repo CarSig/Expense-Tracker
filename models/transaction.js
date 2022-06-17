@@ -7,6 +7,6 @@ const TransactionSchema = new Schema({
   comment: { type: String },
   date: { type: Array, default: [] },
 });
-const Transaction = mongoose.model("Transaction", TransactionSchema);
+const Transaction = mongoose.model("Transactions", TransactionSchema);
 
 module.exports = Transaction;

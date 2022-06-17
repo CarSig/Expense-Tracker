@@ -4,12 +4,9 @@ const colors = require("colors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const app = express();
+const routes = require("./routes/api");
 
 dotenv.config({ path: "./config/config.env" });
-
-const transactions = require("./routes/transactions");
-
-app.use("/api/v1/transactions", transactions);
 
 const PORT = process.env.PORT || 5000;
 
@@ -40,3 +37,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // HTTP request logger
 app.use(morgan("tiny"));
+
+//routing
+app.use("/api", routes);
+
+//package json backup
+// "dev": "concurrently \"nodemon server.js\" \"npm run dev-client\"",

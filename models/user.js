@@ -11,6 +11,6 @@ const UserSchema = new Schema({
   theme: { type: String, default: "light" },
   settings: { type: Object, default: {} }, //settings for user
 });
-const User = mongoose.model("UserExpense", UserSchema); // UserExpense is the name of the collection in the database (users)
+const User = mongoose.model("UsersExpenseTracker", UserSchema); // UserExpense is the name of the collection in the database (users)
 
 module.exports = User;
