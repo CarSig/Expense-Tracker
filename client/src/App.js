@@ -5,6 +5,9 @@ import AddExpense from "./components/AddExpense";
 import NavBar from "./components/NavBar";
 import TransactionList from "./components/TransactionList";
 import { GlobalProvider, GlobalContext } from "./context/GlobalState";
+import Landing from "./components/Landing";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
@@ -67,6 +70,7 @@ function App() {
           <Routes>
             <Route
               path="/"
+              exact
               element={
                 <div>
                   <TransactionList />
@@ -74,7 +78,10 @@ function App() {
               }
             />
 
-            <Route path="/add" element={<AddExpense />} />
+            <Route path="/add" exact element={<AddExpense />} />
+            <Route path="/" exact element={<Landing />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/register" exact element={<Register />} />
           </Routes>
         </BrowserRouter>
       </GlobalProvider>
