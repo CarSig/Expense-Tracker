@@ -2,19 +2,7 @@ import React, { useContext, useState } from "react";
 import { useFilters } from "../customHooks/useFilters";
 
 const Filters = ({ hideFilters, setHideFilters }) => {
-
-
-  const [filters, handleChangeFilter, onSubmitFilter, filteredTransactions] = useFilters({ date: false, amount: false, category: false, description: false, repeating: false })
-
-
-
-
-
-  const [activeFilter, setActiveFilter] = useState({ date: false, amount: false, category: false, description: false, repeating: false });
-
-  const toggleFilterActivity = (filter, e) => {
-    setActiveFilter({ ...activeFilter, [filter]: !activeFilter[filter] });
-  };
+  const [filters, handleChangeFilter, activeFilter, setActiveFilter, toggleFilterActivity] = useFilters()
 
   const closeFiltersWindow = (e) => {
     e.preventDefault();
@@ -49,9 +37,9 @@ const Filters = ({ hideFilters, setHideFilters }) => {
       </button>
 
       <button
-        className={`btn ${activeFilter.description ? "btn-primary" : "btn-secondary"}`}
+        className={`btn ${activeFilter.comment ? "btn-primary" : "btn-secondary"}`}
         onClick={() => {
-          toggleFilterActivity("description");
+          toggleFilterActivity("comment");
         }}
       >
         Description
@@ -106,7 +94,7 @@ const Filters = ({ hideFilters, setHideFilters }) => {
           </div>
         )}
 
-        {activeFilter.description && (
+        {activeFilter.comment && (
           <div className="commentFilter filter">
             <label htmlFor="repeat">Description </label>
             <input type="text" name="comment" placeholder="comment" className="my-1" onChange={handleChangeFilter} />

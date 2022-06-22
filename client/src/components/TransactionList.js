@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-
 import { GlobalContext } from "../context/GlobalState";
 import Balance from "./Balance";
 import Filters from "./Filters";
@@ -11,16 +10,13 @@ import Pagination from "./Pagination";
 const TransactionList = () => {
   const { transactions, filters } = useContext(GlobalContext);
 
-  //Pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const [transactionsPerPage] = useState(10);
-
   //sort transactions by date
   const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
   const sortedTransactions = transactions.sort(sortByDate);
 
-
-  const filteredTransactions1 = sortedTransactions.filter((transaction) => {
+  //Filters
+  const [hideFilters, setHideFilters] = useState(true);
+  const filteredTransactions = sortedTransactions.filter((transaction) => {
     //  
     //   const startDate = filters.startDate;
     //   const endDate = filters.endDate;
@@ -30,81 +26,25 @@ const TransactionList = () => {
     const comment = transaction.comment.toLowerCase().includes(filters.comment.toLowerCase()) || filters.comment === ""
     const category = transaction.category === filters.category || filters.category === ""
     const repeat = transaction.repeat === filters.repeat
-
-
-
-
-
-
     //   const isDate = startDate.length === 0 || endDate.length === 0 ? true : date >= startDate && date <= endDate;
     return isAmount && comment && category
     //  && isDate;
   });
 
 
-  const filteredTransactions = sortedTransactions.filter((transaction) => {
-    // filter by startDate
-    if (filters.startDate) {
-      return transaction.date >= filters.startDate;
-    }
-    return transaction;
-  })
-    .filter((transaction) => {
-      // filter by endDate
-      if (filters.endDate) {
-        return transaction.date <= filters.endDate;
-      }
-      return transaction;
-    })
-    .filter((transaction) => {
-      // filter by minAmount
-      if (filters.minAmount) {
-        return transaction.amount >= filters.minAmount;
-      }
-      return transaction;
-    })
-    .filter((transaction) => {
-      // filter by maxAmount
-      if (filters.maxAmount) {
-        return transaction.amount <= filters.maxAmount;
-      }
-      return transaction;
-    })
-    .filter((transaction) => {
-      // filter by category
-      if (filters.category) {
-        return transaction.category === filters.category;
-      }
-      return transaction;
-    })
-    .filter((transaction) => {
-      // filter by comment
-      if (filters.comment) {
-        return transaction.comment.toLowerCase().includes(filters.comment.toLowerCase());
-      }
-      return transaction;
-    })
-    .filter((transaction) => {
-      // filter by repeat
-      if (filters.repeat) {
-        return transaction.repeat === filters.repeat;
-      }
-      return transaction;
-    })
+  //Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [transactionsPerPage] = useState(10);
 
 
   // get current transactions
   const indexOfLastTransaction = currentPage * transactionsPerPage;
   const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
-
-
-
-  const currentTransactions = filteredTransactions1.slice(indexOfFirstTransaction, indexOfLastTransaction);
+  const currentTransactions = filteredTransactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  //Filters
-  const [hideFilters, setHideFilters] = useState(true);
+
 
   const openFiltersWindow = (e) => {
     e.preventDefault();
