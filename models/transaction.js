@@ -6,6 +6,7 @@ const TransactionSchema = new Schema({
   category: { type: String, required: true },
   comment: { type: String },
   date: { type: Array, default: [] },
+  // user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: [true, "User ID is required"] },
 });
 const Transaction = mongoose.model("Transactions", TransactionSchema);
 

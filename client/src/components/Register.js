@@ -33,12 +33,9 @@ const Register = () => {
       username: values.username,
       firstName: values.firstName,
       lastName: values.lastName,
-      address: values.address,
-      role: values.role,
+
       email: values.email,
       password: values.password,
-      imgNumber: Math.trunc(Math.random() * 99) + 1,
-      gender: values.gender,
     };
 
     axios({
@@ -65,34 +62,13 @@ const Register = () => {
         Create new account{" "}
       </p>
       <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input type="text" name="username" placeholder="username" value={values.username} onChange={handleChange("username")} required />
-        </div>
-        <div className="form-group">
-          <input type="password" name="password" placeholder="password" value={values.password} onChange={handleChange("password")} />
-        </div>
-        <div className="form-group">
-          <input type="email" name="email" placeholder="email" value={values.email} onChange={handleChange("email")} required />
-        </div>
-        <div className="form-group">
-          <input type="text" name="firstName" placeholder="firstName" value={values.firstName} onChange={handleChange("firstName")} />
-        </div>
-        <div className="form-group">
-          <input type="text" name="lastName" placeholder="lastName" value={values.lastName} onChange={handleChange("lastName")} />
-        </div>
-        <div className="form-group">
-          <input type="text" name="address" placeholder="address" value={values.address} onChange={handleChange("address")} />
-        </div>{" "}
-        <div className="form-group">
-          <input type="text" name="role" placeholder="role" value={values.role} onChange={handleChange("role")} />
-        </div>
-        <div className="form-group">
-          <p>Select gender</p>
-          <input type="radio" id="male" name="gender" value="male" onChange={handleChange("gender")} /> <label htmlFor="male">male</label>
-          <br />
-          <input type="radio" id="female" name="gender" value="female" onChange={handleChange("gender")} /> <label htmlFor="female">female</label> <br />
-          <input type="radio" id="other" name="gender" value="other" onChange={handleChange("gender")} /> <label htmlFor="other">other</label> <br />
-        </div>
+        <input className="my-1" type="text" name="username" placeholder="username" value={values.username} onChange={handleChange("username")} required />
+        <input className="my-1" type="password" name="password" placeholder="password" value={values.password} onChange={handleChange("password")} />
+        <input className="my-1" type="email" name="email" placeholder="email" value={values.email} onChange={handleChange("email")} required />
+        <input className="my-1" type="text" name="firstName" placeholder="firstName" value={values.firstName} onChange={handleChange("firstName")} />
+
+        <input className="my-1" type="text" name="lastName" placeholder="lastName" value={values.lastName} onChange={handleChange("lastName")} />
+
         <input type="submit" value="Submit" className="btn btn-primary" />
         {/*<button>Submit</button>*/}
       </form>

@@ -12,7 +12,11 @@ import Register from "./components/Register";
 const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
 function App() {
-  const { transactions } = useContext(GlobalContext);
+  const { transactions,user } = useContext(GlobalContext);
+
+
+
+
 
   //THEME
   let themeStorage = localStorage.getItem("theme");

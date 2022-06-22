@@ -1,20 +1,19 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-export const useFilters = () => {
-  const { transactions } = useContext(GlobalContext);
-  const [filters, setFilters] = useState({
-    startDate: "",
-    endDate: "",
-    minAmount: "",
-    maxAmount: "",
-    category: "",
-    comment: "",
-  });
-  const handleChange = (e) => {
+// addTransaction(filters);
+
+export const useFilters = (initialValues) => {
+
+  const { transactions, filters, setFilters } = useContext(GlobalContext);
+
+
+
+  const [filteredTransactions, setFilteredTransactions] = useState([])
+  const handleChangeFilter = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
-  const onSubmit = (e) => {
+  const onSubmitFilter = (e) => {
     e.preventDefault();
     const newFilteredTransactions = transactions.filter((transaction) => {
       const date = transaction.date;
@@ -33,5 +32,5 @@ export const useFilters = () => {
     });
     setFilteredTransactions(newFilteredTransactions);
   };
-  return [filters, handleChange, onSubmit, filteredTransactions];
+  return [filters, handleChangeFilter, onSubmitFilter, filteredTransactions];
 };

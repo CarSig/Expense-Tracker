@@ -1,17 +1,16 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
-exports.findOneUser = async (req, res) => {
-  console.log("params: ", req.params.id);
-  await User.findById(req.params.id)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((error) => {
-      console.log("Error: ", error);
-      res.json(data);
-    });
-};
+// exports.findOneUser = async (req, res) => {
+//   console.log("params: ", req.params.id);
+//   await User.findById(req.params.id).then((data) => {
+//     res.json(data);
+//   })
+//     .catch((error) => {
+//       console.log("Error: ", error);
+//       res.json(data);
+//     });
+// };
 
 exports.register = async (req, res) => {
   console.log("Body: ", req.body);
@@ -51,15 +50,6 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.deleteUser = (req, res) => {
-  User.findByIdAndRemove(req.params.id).exec((error, deletedItem) => {
-    if (error) {
-      res.send(error);
-    }
-    return res.json(deletedItem);
-  });
-};
-
 exports.updateUser = async (req, res) => {
   User.findByIdAndUpdate(req.params.id, req.body.user, { new: true }, (error, updatedData) => {
     if (error) {
@@ -69,3 +59,11 @@ exports.updateUser = async (req, res) => {
     }
   });
 };
+
+
+function generateRandomNUmberBetween1And100() {
+  return Math.floor(Math.random() * 100) + 1;
+}
+
+generateRandomNUmberBetween1And100();
+

@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
+
 import { GlobalContext } from "../context/GlobalState";
+
+
 
 export const useForm = (initialValues) => {
   //initialValues is an object with all the default values of the form fields

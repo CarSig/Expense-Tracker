@@ -8,12 +8,9 @@ const getRandomDate = () => {
   date.setDate(date.getDate() - Math.floor(Math.random() * 30));
   return date;
 };
-// const getRandomDateinJune2022 = () => {
-//   const day = Math.floor(Math.random() * 30) + 1;
-//   const month = Math.floor(Math.random() * 12) + 1;
-//   const year = 2022;
-//   return `${day}/${month}/${year}`;
-// };
+
+
+
 
 const generateTransactions = (count) => {
   const transactions = [];
@@ -25,11 +22,15 @@ const generateTransactions = (count) => {
       comment: getRandomCar(),
       date: getRandomDate(),
       repeating: Math.random() > 0.1,
+      user: Math.random() < 0.5 ? "62ac22d414c706292634478f" : "62acb0de35351da0da04a0cc",
     });
   }
   return transactions;
 };
 
 const transactions = generateTransactions(100);
+console.log(generateTransactions(10));
+
+
 
 export const transactionArray = transactions;

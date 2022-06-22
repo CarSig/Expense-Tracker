@@ -34,6 +34,8 @@ const Login = () => {
       localStorage.setItem("token", data.data.user);
       localStorage.setItem("username", payload.username);
 
+
+
       setInvalidCredentials(false);
       window.location.href = "/";
     } else {
@@ -53,13 +55,10 @@ const Login = () => {
         Sign into your account
       </p>
       <form className="form" onSubmit={loginUser}>
-        <div className="form-group">
-          <input type="text" name="username" placeholder="username" value={values.username} onChange={handleChange("username")} />
-        </div>
+        <input className="my-1" type="text" name="username" placeholder="username" value={values.username} onChange={handleChange("username")} />
 
-        <div className="form-group">
-          <input type="password" name="password" placeholder="password" value={values.password} onChange={handleChange("password")} />
-        </div>
+        <input className="my-1" type="password" name="password" placeholder="password" value={values.password} onChange={handleChange("password")} />
+
         <input type="submit" value="Login" className="btn btn-primary" />
       </form>
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
 const Transaction = require("../models/transaction");
+const User = require("../models/user");
 
 exports.postTransaction = (req, res) => {
   console.log("Body: ", req.body);
@@ -58,5 +58,3 @@ exports.getAllTransactions = async (req, res) => {
       console.log("Error: ", error);
     });
 };
-
-module.exports = router;

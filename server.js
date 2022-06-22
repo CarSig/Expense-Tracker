@@ -16,7 +16,7 @@ app.listen(PORT, () => {
 
 //////////
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI___OLD;
 
 //connection to database
 mongoose

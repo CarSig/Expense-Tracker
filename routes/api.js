@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const userController = require("./userController");
 const transactionController = require("./transactionController");
+const userController = require("./userController");
 
 //USER
 router.post("/register", userController.register);
 router.post("/login", userController.login);
-router.get("/users/:id", userController.findOneUser);
-router.delete("/users/:id", userController.deleteUser);
+// router.get("/users/:id", userController.findOneUser);
 router.put("/users/:id", userController.updateUser);
 
 //TRANSACTION

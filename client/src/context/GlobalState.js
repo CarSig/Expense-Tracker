@@ -1,6 +1,42 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import { transactionArray } from "./transactionArray";
+import axios from "axios";
+
+
+const getUser = async () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const response = await axios.get("/api/users/62ac22d414c706292634478f", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data.user;
+  }
+
+  return null;
+}
+
+
+
+console.log("getUser: ", getUser());
+// const getUser = async () => {
+//   const user = await axios
+//     .get(`/users/62ac22d414c706292634478f`)
+//     .then(async (response) => {
+//       const data = await response.data;
+
+//       console.log(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+//   return user;
+// };
+
+
+// getUser()
 
 const initialState = {
   transactions: transactionArray,
@@ -59,6 +95,7 @@ export const GlobalProvider = ({ children }) => {
       type: "SET_FILTERS",
       payload: filters,
     });
+    console.log(filters)
   }
   return (
     <GlobalContext.Provider
