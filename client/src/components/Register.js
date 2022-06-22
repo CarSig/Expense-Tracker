@@ -3,9 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 import { BsPersonPlusFill } from "react-icons/bs";
+import { useForm } from "../customHooks/useForm";
 
 const Register = () => {
-  const [values, setValues] = useState({
+  const [values, handleChange] = useForm({
     username: "",
     firstname: "",
     lastName: "",
@@ -16,15 +17,13 @@ const Register = () => {
     imgNumber: "",
     gender: "",
   });
+
   const navigate = useNavigate();
 
   //TODO: authorization
   const signedUser = localStorage.getItem("username");
 
-  const handleChange = (input) => (e) => {
-    setValues({ ...values, [input]: e.target.value });
-    console.log(values);
-  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,19 +61,17 @@ const Register = () => {
         Create new account{" "}
       </p>
       <form className="form" onSubmit={handleSubmit}>
-        <input className="my-1" type="text" name="username" placeholder="username" value={values.username} onChange={handleChange("username")} required />
-        <input className="my-1" type="password" name="password" placeholder="password" value={values.password} onChange={handleChange("password")} />
-        <input className="my-1" type="email" name="email" placeholder="email" value={values.email} onChange={handleChange("email")} required />
-        <input className="my-1" type="text" name="firstName" placeholder="firstName" value={values.firstName} onChange={handleChange("firstName")} />
-
-        <input className="my-1" type="text" name="lastName" placeholder="lastName" value={values.lastName} onChange={handleChange("lastName")} />
+        <input className="my-1" type="text" name="username" placeholder="username" value={values.username} onChange={handleChange} required />
+        <input className="my-1" type="password" name="password" placeholder="password" value={values.password} onChange={handleChange} />
+        <input className="my-1" type="email" name="email" placeholder="email" value={values.email} onChange={handleChange} required />
+        <input className="my-1" type="text" name="firstName" placeholder="firstName" value={values.firstName} onChange={handleChange} />
+        <input className="my-1" type="text" name="lastName" placeholder="lastName" value={values.lastName} onChange={handleChange} />
 
         <input type="submit" value="Submit" className="btn btn-primary" />
         {/*<button>Submit</button>*/}
       </form>
       {signedUser === null && (
         <div>
-          {" "}
           <p className="my-1">
             Already have an account? <Link to="/login"> Sign in</Link>
           </p>

@@ -4,11 +4,13 @@ import Balance from "./Balance";
 import Filters from "./Filters";
 import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
-
+import { useFilters } from "../customHooks/useFilters";
 import Pagination from "./Pagination";
+import Chart from "./Chart";
 
 const TransactionList = () => {
   const { transactions, filters } = useContext(GlobalContext);
+
 
   //sort transactions by date
   const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
@@ -44,24 +46,28 @@ const TransactionList = () => {
   // change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-
-
-  const openFiltersWindow = (e) => {
+  const toggleFiltersWindow = (e) => {
     e.preventDefault();
-    setHideFilters(false);
+    setHideFilters(!hideFilters);
   };
+
   return (
     <main className="container">
+      <pre>{JSON.stringify(filters, null, 2)}</pre>
       <h2 className="large text-primary">History</h2>
       <Balance />
       <IncomeExpenses />
       <br />
-      <button className="btn btn-primary" onClick={openFiltersWindow}>
-        Show Filters
+      <button className="btn btn-primary" onClick={toggleFiltersWindow}>
+        {hideFilters ? "Show Filters" : "Hide Filters"}
       </button>
       <br />
       <br />
       <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
+
+
+      <Chart data={filteredTransactions} />
+
       <div className="transactions">
         <ul>
           {currentTransactions.map((transaction) => {

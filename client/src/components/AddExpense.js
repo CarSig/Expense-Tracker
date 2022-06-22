@@ -18,8 +18,8 @@ const AddExpense = () => {
           </option>
           <option value="food">Food</option>
           <option value="pet">Pet</option>
-          <option value="Bars">Bars</option>
-          <option value="Travel">Travel</option>
+          <option value="bar">Bars</option>
+          <option value="travel">Travel</option>
         </select>
 
         <input type="text" name="comment" value={values.comment} placeholder="comment" className="my-1" onChange={handleChange} />

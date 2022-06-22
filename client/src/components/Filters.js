@@ -1,8 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFilters } from "../customHooks/useFilters";
+import AddCategory from "./AddCategory";
 
 const Filters = ({ hideFilters, setHideFilters }) => {
-  const [filters, handleChangeFilter, activeFilter, setActiveFilter, toggleFilterActivity] = useFilters()
+  const [filters, handleChangeFilter, activeFilter, toggleFilterActivity, resetFilters] = useFilters()
+
 
   const closeFiltersWindow = (e) => {
     e.preventDefault();
@@ -12,43 +14,38 @@ const Filters = ({ hideFilters, setHideFilters }) => {
     <div className={`container popup ${hideFilters && "hidden"}`}>
       <button
         className={`btn ${activeFilter.date ? "btn-primary" : "btn-secondary"}`}
-        onClick={() => {
-          toggleFilterActivity("date");
-        }}
+        onClick={toggleFilterActivity}
+        name="date"
       >
         Date
       </button>
       <button
         className={`btn ${activeFilter.amount ? "btn-primary" : "btn-secondary"}`}
-        onClick={() => {
-          toggleFilterActivity("amount");
-        }}
+        onClick={toggleFilterActivity}
+        name="amount"
       >
         Amount
       </button>
 
       <button
         className={`btn ${activeFilter.category ? "btn-primary" : "btn-secondary"}`}
-        onClick={() => {
-          toggleFilterActivity("category");
-        }}
+        onClick={toggleFilterActivity}
+        name="category"
       >
         Category
       </button>
 
       <button
         className={`btn ${activeFilter.comment ? "btn-primary" : "btn-secondary"}`}
-        onClick={() => {
-          toggleFilterActivity("comment");
-        }}
+        onClick={toggleFilterActivity}
+        name="comment"
       >
         Description
       </button>
       <button
         className={`btn ${activeFilter.repeating ? "btn-primary" : "btn-secondary"}`}
-        onClick={() => {
-          toggleFilterActivity("repeating");
-        }}
+        onClick={toggleFilterActivity}
+        name="repeating"
       >
         Repeating
       </button>
@@ -70,7 +67,7 @@ const Filters = ({ hideFilters, setHideFilters }) => {
           <div className="filterWrapper">
             <div className="amountFilter filter">
               <label htmlFor="minAmount">Minimal amount</label>
-              <input type="number" name="minAmount" placeholder="amount" defaultValue={"from"} className="my-1" onChange={handleChangeFilter} />
+              <input type="number" name="minAmount" placeholder="amount" className="my-1" onChange={handleChangeFilter} />
             </div>
             <div className="amountFilter filter">
               <label htmlFor="maxAmount">Maximal amount</label>
@@ -79,9 +76,9 @@ const Filters = ({ hideFilters, setHideFilters }) => {
           </div>
         )}
         {activeFilter.category && (
-          <div className="categoryFilter filter">
+          <div className="categoryFilter filter display-flex">
             <label htmlFor="category">Category </label>
-            <select name="category" id="category" value="select" className="my-1" onChange={handleChangeFilter}>
+            <select name="category" id="category" className="my-1" onChange={handleChangeFilter}>
               <option value="select" disabled hidden>
                 Select Category
               </option>
@@ -91,6 +88,9 @@ const Filters = ({ hideFilters, setHideFilters }) => {
               <option value="travel">Travel</option>
               <option value="shopping">Shopping</option>
             </select>
+            <button className="btn btn-primary">Add New</button>
+            <AddCategory />
+
           </div>
         )}
 
@@ -104,7 +104,7 @@ const Filters = ({ hideFilters, setHideFilters }) => {
         {activeFilter.repeating && (
           <div className="repeatFilter ">
             <label htmlFor="repeat">Repeat</label>
-            <input type="checkbox" id="repeat" name="repeat" onChange={handleChangeFilter} />
+            <input type="checkbox" id="repeat" name="repeat" onClick={handleChangeFilter} />
           </div>
         )}
 
@@ -112,16 +112,16 @@ const Filters = ({ hideFilters, setHideFilters }) => {
           // if some filter is active, show button
 
           <div>
-            <br /> <button className="btn btn-primary">Filter</button>
-            <button className="btn ">Clear</button>
-            <button className="btn btn-secondary" onClick={closeFiltersWindow}>
+            <br />
+            <button className="btn" onClick={resetFilters}>Reset Filters</button>
+            <button className="btn btn-primary" onClick={closeFiltersWindow}>
               {" "}
-              Cancel
+              Hide Filters
             </button>
           </div>
         }
       </form>
-    </div>
+    </div >
   );
 };
 

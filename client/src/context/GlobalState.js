@@ -19,25 +19,6 @@ const getUser = async () => {
 }
 
 
-
-console.log("getUser: ", getUser());
-// const getUser = async () => {
-//   const user = await axios
-//     .get(`/users/62ac22d414c706292634478f`)
-//     .then(async (response) => {
-//       const data = await response.data;
-
-//       console.log(data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//   return user;
-// };
-
-
-// getUser()
-
 const initialState = {
   transactions: transactionArray,
 
@@ -46,7 +27,7 @@ const initialState = {
     email: "",
     password: "",
     _id: "",
-    categories: [],
+
   },
   filters: {
     startDate: "",
@@ -57,6 +38,8 @@ const initialState = {
     comment: "",
     repeat: "",
   },
+  categories: [],
+  comments: []
 };
 
 //Create context
