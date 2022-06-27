@@ -8,11 +8,13 @@ import { GlobalProvider, GlobalContext } from "./context/GlobalState";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Settings from "./components/Settings";
+import Chart from "./components/Chart";
 
 const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
 function App() {
-  const { transactions,user } = useContext(GlobalContext);
+  const { transactions, user } = useContext(GlobalContext);
 
 
 
@@ -86,6 +88,8 @@ function App() {
             <Route path="/" exact element={<Landing />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
+            <Route path="/users" exact element={<Settings />} />
+            <Route path="/statistics" exact element={<Chart />} />
           </Routes>
         </BrowserRouter>
       </GlobalProvider>

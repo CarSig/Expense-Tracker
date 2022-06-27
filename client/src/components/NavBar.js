@@ -18,7 +18,7 @@ const NavBar = () => {
             <a href="/">Transactions</a>
           </li>
           <li>
-            <a href="/">Statistics</a>
+            <a href="/statistics">Statistics</a>
           </li>
           <li>
             <a href="/">Settings</a>

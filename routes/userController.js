@@ -67,3 +67,5 @@ function generateRandomNUmberBetween1And100() {
 
 generateRandomNUmberBetween1And100();
 
+
+

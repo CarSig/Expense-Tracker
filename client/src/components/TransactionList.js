@@ -85,12 +85,13 @@ const TransactionList = () => {
   return (
     <main className="container">
 
-      <pre>{categories}</pre>
-      <pre>{JSON.stringify(amounts, null, 2)}</pre>
-      <pre>{JSON.stringify(amountsArray, null, 2)}</pre>
-      <pre>{JSON.stringify(categoriesArray, null, 2)}</pre>
-      <pre>{JSON.stringify(filters, null, 2)}</pre>
-      <pre>{JSON.stringify(testData, null, 2)}</pre>
+      {    //<pre>{categories}</pre>
+        //     <pre>{JSON.stringify(amounts, null, 2)}</pre>
+        //     <pre>{JSON.stringify(amountsArray, null, 2)}</pre>
+        //     <pre>{JSON.stringify(categoriesArray, null, 2)}</pre>
+        //     <pre>{JSON.stringify(filters, null, 2)}</pre>
+        //     <pre>{JSON.stringify(testData, null, 2)}</pre>
+      }
       <h2 className="large text-primary">History</h2>
       <Balance />
       <IncomeExpenses />
