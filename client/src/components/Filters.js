@@ -95,7 +95,8 @@ const Filters = ({ hideFilters, setHideFilters }) => {
               <option value="shopping">Shopping</option>
             </select>
             <button className="btn btn-primary">Add New</button>
-            <AddCategory />
+            
+
 
           </div>
         )}

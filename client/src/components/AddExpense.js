@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "../customHooks/useForm";
+import AddCategory from "./AddCategory";
 
 
 const AddExpense = () => {
@@ -16,11 +17,15 @@ const AddExpense = () => {
           <option value="select" disabled hidden>
             Select Category
           </option>
+          <option value="new">Add new...</option>
           <option value="food">Food</option>
           <option value="pet">Pet</option>
           <option value="bar">Bars</option>
           <option value="travel">Travel</option>
+          <option value="shopping">Shopping</option>
         </select>
+        {values.category === "new" && <AddCategory />}
+
 
         <input type="text" name="comment" value={values.comment} placeholder="comment" className="my-1" onChange={handleChange} />
         <input type="date" name="date" value={values.date} placeholder="comment" className="my-1" onChange={handleChange} />
