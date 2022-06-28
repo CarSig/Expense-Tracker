@@ -5,6 +5,12 @@ import AddCategory from "./AddCategory";
 const Filters = ({ hideFilters, setHideFilters }) => {
   const [filters, handleChangeFilter, activeFilter, toggleFilterActivity, resetFilters] = useFilters()
 
+  useEffect(() => {
+    // update localStorage filters
+    localStorage.setItem("filters", JSON.stringify(filters));
+  }, [filters]);
+
+
 
   const closeFiltersWindow = (e) => {
     e.preventDefault();

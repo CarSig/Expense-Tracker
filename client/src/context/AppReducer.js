@@ -1,5 +1,6 @@
 export default (state, action) => {
   switch (action.type) {
+
     case "ADD_TRANSACTION":
       return {
         ...state,
@@ -20,6 +21,13 @@ export default (state, action) => {
         ...state,
         filters: action.payload,
       };
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+
 
     default:
       return state;

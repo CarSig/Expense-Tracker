@@ -6,7 +6,7 @@ Chart.register(...registerables);
 
 
 
-const DoughnutChart = ({ testData, amountsArray, categoriesArray }) => {
+const DoughnutChart = ({ amountsArray, categoriesArray }) => {
     const [activeChart, setActiveChart] = useState("line");
 
     const handleChange = (event) => {

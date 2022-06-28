@@ -22,7 +22,10 @@ const NavBar = () => {
             {" "}
             <a href="/">Expense Tracker</a>
           </h1>
+
         </div>
+        <small color="textSecondary">hello {signed}</small>
+
         <ul>
           <li>
             <a href="/add">Add new transaction</a>
@@ -34,7 +37,7 @@ const NavBar = () => {
             <a href="/statistics">Statistics</a>
           </li>
           <li>
-            <a href="/">Settings</a>
+            <a href="/settings">Settings</a>
           </li>
           <li>
             <a href="login" color="default" onClick={signOut}>
@@ -42,7 +45,9 @@ const NavBar = () => {
             </a>
           </li>
         </ul>
+
       </nav>
+
     </div>
   );
 };

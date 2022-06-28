@@ -6,13 +6,15 @@ const mongoose = require("mongoose");
 const toId = mongoose.Types.ObjectId;
 
 exports.findOneUser = async (req, res) => {
+
     console.log("params: ", req.params.id);
-    await User.findOne({ username: "bb1" }).populate({ path: "transactions", model: "Transaction" }).then((data) => {
-        res.json(data);
+    await User.findOne({ _id: req.params.id }).then((data) => {
+        // console.log("data user JEE: ", data);
+        return res.json(data);
     })
         .catch((error) => {
             console.log("Error: ", error);
-            res.json(data);
+
         });
 };
 
@@ -48,7 +50,7 @@ exports.login = async (req, res) => {
         password: req.body.password,
     });
 
-    // AUUTHORIZATION 1:)
+    // AU'UTHORIZATION 1:)
 
     if (user) {
         const token = jwt.sign(
@@ -59,7 +61,7 @@ exports.login = async (req, res) => {
             "secretKey"
         );
 
-        return res.json({ status: "ok", user: token });
+        return res.json({ status: "ok", user: token, userData: user });
     } else {
         return res.json({ status: "error", user: false });
     }

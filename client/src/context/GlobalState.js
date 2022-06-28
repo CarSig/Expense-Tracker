@@ -3,32 +3,45 @@ import AppReducer from "./AppReducer";
 import { transactionArray } from "./transactionArray";
 import axios from "axios";
 
+// const ovoTest = () => {
+//   axios
+//     .get("api/users")
+//     .then(async (response) => {
+//       const data = await response.data;
 
-const getUser = async () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    const response = await axios.get("/api/users/62ac22d414c706292634478f", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data.user;
-  }
+//       return data;
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }
 
-  return null;
-}
+// const getUser = async () => {
+//   const token = localStorage.getItem("token");
+//   if (token) {
+//     const response = await axios.get("/api/users/62ac22d414c706292634478f", {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     return response.data.user;
+//   }
+
+//   return null;
+// }
 
 
 const initialState = {
+
   transactions: transactionArray,
 
-  user: {
-    name: "",
-    email: "",
-    password: "",
-    _id: "",
+  user:
+  {
+    a: "aaa",
+    b: "bbb"
+  }
 
-  },
+  ,
   filters: {
     startDate: "",
     endDate: "",
@@ -49,6 +62,14 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  function setUser(user) {
+    dispatch({
+      type: "SET_USER",
+      payload: user
+
+    })
+
+  }
   //Actions Transactions
   function deleteTransaction(id) {
     dispatch({
@@ -82,7 +103,7 @@ export const GlobalProvider = ({ children }) => {
   }
   return (
     <GlobalContext.Provider
-      value={{ transactions: state.transactions, editTransaction, addTransaction, deleteTransaction, filters: state.filters, setFilters }}
+      value={{ user: state.user, transactions: state.transactions, filters: state.filters, editTransaction, addTransaction, deleteTransaction, setFilters, setUser }}
     >
       {children}
     </GlobalContext.Provider>

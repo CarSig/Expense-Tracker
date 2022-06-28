@@ -53,7 +53,16 @@ const TransactionList = () => {
   };
 
   const categories = [...new Set(filteredTransactions.map((transaction) => transaction.category))];
-
+  // function creates an array of objects with the category and the sum of the transactions
+  const categoryTotals = categories.map((category) => {
+    return {
+      category: category,
+      total: filteredTransactions.reduce((total, transaction) => {
+        return transaction.category === category ? total + transaction.amount : total;
+      }, 0),
+    };
+  }
+  );
 
 
   // function creates array for each category with sum of amounts
@@ -65,33 +74,19 @@ const TransactionList = () => {
     acc[item.category] += item.amount;
     return acc;
   }, {});
+
+
   console.log(amounts);
   const amountsArray = Object.keys(amounts).map((key) => amounts[key]);
   const categoriesArray = Object.keys(amounts).map((key) => key);
 
 
 
-  const testData = filteredTransactions.reduce((acc, item) => {
 
-    if (acc[item.category]) {
-      acc[item.category] += item.amount;
-    } else {
-      acc[item.category] = item.amount;
-    }
-    return acc
-  })
-  console.log(testData);
 
   return (
     <main className="container">
 
-      {    //<pre>{categories}</pre>
-        //     <pre>{JSON.stringify(amounts, null, 2)}</pre>
-        //     <pre>{JSON.stringify(amountsArray, null, 2)}</pre>
-        //     <pre>{JSON.stringify(categoriesArray, null, 2)}</pre>
-        //     <pre>{JSON.stringify(filters, null, 2)}</pre>
-        //     <pre>{JSON.stringify(testData, null, 2)}</pre>
-      }
       <h2 className="large text-primary">History</h2>
       <Balance />
       <IncomeExpenses />
@@ -100,10 +95,14 @@ const TransactionList = () => {
         {hideFilters ? "Show Filters" : "Hide Filters"}
       </button>
       <br />
+
+
+      <h3>Filters</h3>
+      <pre>{localStorage.getItem("filters")}</pre>
       <br />
       <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
 
-      <DoughnutChart testData={testData} amountsArray={amountsArray} categoriesArray={categoriesArray} />
+      <DoughnutChart amountsArray={amountsArray} categoriesArray={categoriesArray} />
 
 
       <div className="transactions">

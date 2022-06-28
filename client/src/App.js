@@ -88,7 +88,7 @@ function App() {
             <Route path="/" exact element={<Landing />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
-            <Route path="/users" exact element={<Settings />} />
+            <Route path="/settings" exact element={<Settings />} />
             <Route path="/statistics" exact element={<Chart />} />
           </Routes>
         </BrowserRouter>
