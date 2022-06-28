@@ -1,6 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const NavBar = () => {
+  const [signed, setSigned] = useState("");
+
+  useEffect(() => {
+    const storedAuthToken = localStorage.getItem("username");
+    setSigned(storedAuthToken);
+    console.log(signed);
+  }, [localStorage]);
+
+  const signOut = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
   return (
     <div className="header">
       <nav className="navbar bg-navbar">
@@ -24,7 +37,7 @@ const NavBar = () => {
             <a href="/">Settings</a>
           </li>
           <li>
-            <a href="login" color="default">
+            <a href="login" color="default" onClick={signOut}>
               Sign out
             </a>
           </li>

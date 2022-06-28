@@ -74,7 +74,7 @@ exports.deleteUser = (req, res) => {
     });
 };
 
-exports.update = async (req, res) => {
+exports.updateUser = async (req, res) => {
     User.findByIdAndUpdate(req.params.id, req.body.user, { new: true }, (error, updatedData) => {
         if (error) {
             console.log("error" + error);

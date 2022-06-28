@@ -61,11 +61,7 @@ exports.updateUser = async (req, res) => {
 };
 
 
-function generateRandomNUmberBetween1And100() {
-  return Math.floor(Math.random() * 100) + 1;
-}
 
-generateRandomNUmberBetween1And100();
 
 
 
