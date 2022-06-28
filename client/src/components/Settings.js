@@ -9,37 +9,7 @@ const Settings = () => {
     const [loggedInUser, setLoggedInUser] = useState(null);
     const { user, setUser, filters } = useContext(GlobalContext);
 
-    // useEffect(() => {
-    // axios
-    //     .get("api/users")
-    //     .then(async (response) => {
-    //         const data = await response.data;
 
-    //         setUser(data);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-
-
-
-    //     axios({
-    //         url: "api/logged",
-    //         method: "GET",
-    //         data: {
-    //             username: localStorage.getItem("username")
-
-    //         },
-    //     }).then(async (response) => {
-
-    //         const data = await response.data;
-    //         console.log("data: ", data);
-    //         setLoggedInUser(data);
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     })
-
-    // }, []);
 
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { FiLogIn } from "react-icons/fi";
@@ -9,6 +9,13 @@ const Login = () => {
   const [values, setValues] = useState({ username: "", password: "" });
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const { setUser, user } = useContext(GlobalContext);
+
+  useEffect(() => {
+    // update localStorage filters
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+
+
 
   const handleChange = (input) => (e) => {
     setValues({ ...values, [input]: e.target.value });
@@ -61,20 +68,11 @@ const Login = () => {
       }).then(async (response) => {
         const data = await response.data;
         setUser(data);
-        prompt(JSON.stringify(data))
-        prompt(JSON.stringify(user))
       }
       ).catch((err) => {
         console.log(err);
       }
       );
-
-
-      alert(JSON.stringify(update._id) + "Login - line 46")
-      alert(JSON.stringify(user) + "Login - line 47")
-
-
-
       setInvalidCredentials(false);
       window.location.href = "/settings";
     } else {
