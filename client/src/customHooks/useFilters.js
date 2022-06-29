@@ -12,7 +12,6 @@ export const useFilters = () => {
   };
 
 
-
   const handleChangeFilter = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
     localStorage.setItem("filters", JSON.stringify(filters));
@@ -21,7 +20,6 @@ export const useFilters = () => {
 
   const resetFilters = (e) => {
     e.preventDefault()
-
     setFilters({
       startDate: "",
       endDate: "",
@@ -36,7 +34,28 @@ export const useFilters = () => {
 
 
 
-
   return [filters, handleChangeFilter, activeFilter, toggleFilterActivity, resetFilters]
 
 };
+
+
+export function applyFilters(transactions, filters) {
+
+  //TODO: logic for repeat once repeat is implemented
+  const result = transactions.filter((transaction) => {
+    const transactionDate = transaction.date.toISOString().slice(0, 10)
+    const startDate = filters.startDate;
+    const endDate = filters.endDate;
+    const minAmount = filters.minAmount;
+    const maxAmount = filters.maxAmount;
+    const isAmount = (!minAmount || minAmount < transaction.amount) && (!maxAmount || maxAmount > transaction.amount);
+    const comment = transaction.comment.toLowerCase().includes(filters.comment.toLowerCase()) || filters.comment === ""
+    const category = transaction.category === filters.category || filters.category === ""
+    //const repeat = transaction.repeat === filters.repeat  // TODO:if unchecked, it will return all transactions
+    const isDate = (!startDate || startDate <= transactionDate) && (!endDate || endDate >= transactionDate);
+    console.log("transaction", transaction.date.toISOString().slice(0, 10), "-------startDate", startDate)
+
+    return isAmount && comment && category && isDate;
+  });
+  return result;
+}

@@ -4,15 +4,13 @@ import Balance from "./Balance";
 import Filters from "./Filters";
 import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
-import { useFilters } from "../customHooks/useFilters";
+import { useFilters, applyFilters } from "../customHooks/useFilters";
 import Pagination from "./Pagination";
-import Chart from "./Chart";
 import DoughnutChart from "./charts/DoughnutChart";
 import { usePaginate } from "../customHooks/usePaginate";
 
 const TransactionList = () => {
   const { transactions, filters } = useContext(GlobalContext);
-
 
   //sort transactions by date
   const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
@@ -20,31 +18,22 @@ const TransactionList = () => {
 
   //Filters
   const [hideFilters, setHideFilters] = useState(true);
-  const filteredTransactions = sortedTransactions.filter((transaction) => {
-    //  
-    //   const startDate = filters.startDate;
-    //   const endDate = filters.endDate;
-    const minAmount = filters.minAmount;
-    const maxAmount = filters.maxAmount;
-    const isAmount = (!minAmount || minAmount < transaction.amount) && (!maxAmount || maxAmount > transaction.amount);
-    const comment = transaction.comment.toLowerCase().includes(filters.comment.toLowerCase()) || filters.comment === ""
-    const category = transaction.category === filters.category || filters.category === ""
-    const repeat = transaction.repeat === filters.repeat
-    //   const isDate = startDate.length === 0 || endDate.length === 0 ? true : date >= startDate && date <= endDate;
-    return isAmount && comment && category
-    //  && isDate;
-  });
+  const filteredTransactions = applyFilters(sortedTransactions, filters);
 
+  //Pagination
   const [transactionsPerPage, totalTransactions, currentPage, paginate, currentTransactions] = usePaginate(filteredTransactions);
-
 
   const toggleFiltersWindow = (e) => {
     e.preventDefault();
     setHideFilters(!hideFilters);
   };
 
+  //TODO: refacator to separate components
+  //-------CHARTS logic-----------
+
   const categories = [...new Set(filteredTransactions.map((transaction) => transaction.category))];
-  // function creates an array of objects with the category and the sum of the transactions
+
+
   const categoryTotals = categories.map((category) => {
     return {
       category: category,
@@ -55,9 +44,7 @@ const TransactionList = () => {
   }
   );
 
-
   // function creates array for each category with sum of amounts
-
   const amounts = filteredTransactions.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = 0;
@@ -69,7 +56,6 @@ const TransactionList = () => {
 
   const amountsArray = Object.keys(amounts).map((key) => amounts[key]);
   const categoriesArray = Object.keys(amounts).map((key) => key);
-
 
 
   return (
@@ -87,9 +73,7 @@ const TransactionList = () => {
 
       <br />
       <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
-
       <DoughnutChart amountsArray={amountsArray} categoriesArray={categoriesArray} />
-
 
       <div className="transactions">
         <ul>
