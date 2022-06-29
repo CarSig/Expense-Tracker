@@ -6,7 +6,7 @@ Chart.register(...registerables);
 
 
 
-const DoughnutChart = ({ amountsArray, categoriesArray }) => {
+const Charts = ({ amountsArray, categoriesArray }) => {
     const [activeChart, setActiveChart] = useState("line");
 
     const handleChange = (event) => {
@@ -33,7 +33,10 @@ const DoughnutChart = ({ amountsArray, categoriesArray }) => {
                     "rgba(255, 99, 132, 1)",
 
                 ],
-            }]
+            }],
+        options: {
+            maintainAspectRatio: false
+        }
     }
     return (
         <div className="container" style={{ width: "600px" }}>
@@ -72,4 +75,4 @@ const DoughnutChart = ({ amountsArray, categoriesArray }) => {
     )
 }
 
-export default DoughnutChart
+export default Charts

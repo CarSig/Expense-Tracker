@@ -6,7 +6,7 @@ import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
 import { useFilters, applyFilters } from "../customHooks/useFilters";
 import Pagination from "./Pagination";
-import DoughnutChart from "./charts/DoughnutChart";
+import DoughnutChart from "./charts/Charts";
 import { usePaginate } from "../customHooks/usePaginate";
 
 const TransactionList = () => {
@@ -20,13 +20,13 @@ const TransactionList = () => {
   const [hideFilters, setHideFilters] = useState(true);
   const filteredTransactions = applyFilters(sortedTransactions, filters);
 
-  //Pagination
-  const [transactionsPerPage, totalTransactions, currentPage, paginate, currentTransactions] = usePaginate(filteredTransactions);
-
   const toggleFiltersWindow = (e) => {
     e.preventDefault();
     setHideFilters(!hideFilters);
   };
+
+  //Pagination
+  const [transactionsPerPage, totalTransactions, currentPage, paginate, currentTransactions] = usePaginate(filteredTransactions);
 
   //TODO: refacator to separate components
   //-------CHARTS logic-----------
