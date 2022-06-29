@@ -8,6 +8,7 @@ import { useFilters } from "../customHooks/useFilters";
 import Pagination from "./Pagination";
 import Chart from "./Chart";
 import DoughnutChart from "./charts/DoughnutChart";
+import { usePaginate } from "../customHooks/usePaginate";
 
 const TransactionList = () => {
   const { transactions, filters } = useContext(GlobalContext);
@@ -34,18 +35,8 @@ const TransactionList = () => {
     //  && isDate;
   });
 
+  const [transactionsPerPage, totalTransactions, currentPage, paginate, currentTransactions] = usePaginate(filteredTransactions);
 
-  //Pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const [transactionsPerPage] = useState(10);
-
-
-  // get current transactions
-  const indexOfLastTransaction = currentPage * transactionsPerPage;
-  const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
-  const currentTransactions = filteredTransactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
-  // change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const toggleFiltersWindow = (e) => {
     e.preventDefault();
@@ -76,11 +67,9 @@ const TransactionList = () => {
   }, {});
 
 
-  console.log(amounts);
+
   const amountsArray = Object.keys(amounts).map((key) => amounts[key]);
   const categoriesArray = Object.keys(amounts).map((key) => key);
-
-
 
 
 

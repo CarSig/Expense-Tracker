@@ -5,8 +5,8 @@ import { GlobalContext } from "../context/GlobalState";
 
 export const useFilters = () => {
   const { transactions, filters, setFilters } = useContext(GlobalContext);
-
   const [activeFilter, setActiveFilter] = useState({ date: false, amount: false, category: false, comment: false, repeating: false });
+
   const toggleFilterActivity = (e) => {
     setActiveFilter({ ...activeFilter, [e.target.name]: !activeFilter[e.target.name] });
   };
@@ -20,8 +20,8 @@ export const useFilters = () => {
 
 
   const resetFilters = (e) => {
-    // e.preventDefault()
-    // console.log(e.target.value)
+    e.preventDefault()
+
     setFilters({
       startDate: "",
       endDate: "",
