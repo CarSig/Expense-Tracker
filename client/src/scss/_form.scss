@@ -21,6 +21,24 @@ textarea {
   border-radius: 1.6rem;
 }
 
+.categoryInput {
+  display: grid;
+  grid-template-columns: 7fr 1fr;
+  grid-gap: 1rem;
+  width: 80%;
+
+  select,
+  input {
+    width: 100%;
+  }
+  button {
+    border-radius: 1.6rem;
+    margin: 1rem;
+
+    cursor: pointer;
+  }
+}
+
 /* ---------CUSTOM - checkbox ---------*/
 input[type="checkbox"] {
   appearance: none;

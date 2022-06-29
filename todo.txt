@@ -1,0 +1,7 @@
+POPULATE 1 user with transactions so he can be test user1
+
+map categories in SELECT ( add expenese) instead of hardcoding
+Design settings
+    add option to add category
+
+DEPLOY
