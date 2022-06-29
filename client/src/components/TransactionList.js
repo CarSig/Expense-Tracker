@@ -67,7 +67,6 @@ const TransactionList = () => {
   }, {});
 
 
-
   const amountsArray = Object.keys(amounts).map((key) => amounts[key]);
   const categoriesArray = Object.keys(amounts).map((key) => key);
 

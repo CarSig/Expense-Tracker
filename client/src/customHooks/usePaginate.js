@@ -12,5 +12,6 @@ export const usePaginate = (arr) => {
     // change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
+    console.log(currentTransactions)
     return [transactionsPerPage, totalTransactions, currentPage, paginate, currentTransactions];
 }
