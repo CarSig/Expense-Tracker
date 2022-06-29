@@ -11,13 +11,10 @@ export const useFilters = () => {
     setActiveFilter({ ...activeFilter, [e.target.name]: !activeFilter[e.target.name] });
   };
 
-
   const handleChangeFilter = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
     localStorage.setItem("filters", JSON.stringify(filters));
   };
-
-
   const resetFilters = (e) => {
     e.preventDefault()
     setFilters({
@@ -31,9 +28,6 @@ export const useFilters = () => {
     })
     localStorage.setItem("filters", JSON.stringify(filters));
   }
-
-
-
   return [filters, handleChangeFilter, activeFilter, toggleFilterActivity, resetFilters]
 
 };
@@ -53,8 +47,6 @@ export function applyFilters(transactions, filters) {
     const category = transaction.category === filters.category || filters.category === ""
     //const repeat = transaction.repeat === filters.repeat  // TODO:if unchecked, it will return all transactions
     const isDate = (!startDate || startDate <= transactionDate) && (!endDate || endDate >= transactionDate);
-    console.log("transaction", transaction.date.toISOString().slice(0, 10), "-------startDate", startDate)
-
     return isAmount && comment && category && isDate;
   });
   return result;
