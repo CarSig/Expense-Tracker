@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useFilters } from "../customHooks/useFilters";
 import AddCategory from "./AddCategory";
+import { GlobalContext } from "../context/GlobalState";
 
 const Filters = ({ hideFilters, setHideFilters }) => {
   const [filters, handleChangeFilter, activeFilter, toggleFilterActivity, resetFilters] = useFilters()
+
+  const { categories } = useContext(GlobalContext);
 
   useEffect(() => {
     // update localStorage filters
@@ -88,11 +91,10 @@ const Filters = ({ hideFilters, setHideFilters }) => {
               <option value="select" disabled hidden>
                 Select Category
               </option>
-              <option value="food">Food</option>
-              <option value="pet">Pet</option>
-              <option value="bar">Bars</option>
-              <option value="travel">Travel</option>
-              <option value="shopping">Shopping</option>
+              {categories.map(category => (
+                <option key={category} value={category}>
+                  {category}
+                </option>))}
             </select>
 
 

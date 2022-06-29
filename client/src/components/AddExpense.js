@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "../customHooks/useForm";
 import AddCategory from "./AddCategory";
+import { GlobalContext } from "../context/GlobalState";
 
 
 const AddExpense = () => {
+  const { categories } = useContext(GlobalContext);
+
+
   let formattedDate = new Date().toISOString().slice(0, 10);
   const [values, handleChange, onSubmit] = useForm({ amount: 0, category: "select", comment: "", date: formattedDate, _id: "" });
   const [isNewCategory, setIsNewCategory] = useState(false);
+
 
   return (
     <main className="container">
@@ -21,15 +26,15 @@ const AddExpense = () => {
             <option value="select" disabled hidden>
               Select Category
             </option>
+            {categories.map(category => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
 
-            <option value="food">Food</option>
-            <option value="pet">Pet</option>
-            <option value="bar">Bars</option>
-            <option value="travel">Travel</option>
-            <option value="shopping">Shopping</option>
           </select>}
 
-          <button className={`btn btn-${isNewCategory ? "primary" : "secondary"}`} onClick={() => { setIsNewCategory(!isNewCategory) }} >{`${isNewCategory ? "Add New" : "Select"}`}</button>
+          <button className={`btn btn-${isNewCategory ? "secondary" : "primary"}`} onClick={() => { setIsNewCategory(!isNewCategory) }} >{`${isNewCategory ? "Select" : "Add New"}`}</button>
 
 
         </div>

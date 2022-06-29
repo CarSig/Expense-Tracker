@@ -39,9 +39,9 @@ const initialState = {
   {
     a: "aaa",
     b: "bbb"
-  }
+  },
 
-  ,
+
   filters: {
     startDate: "",
     endDate: "",
@@ -51,7 +51,7 @@ const initialState = {
     comment: "",
     repeat: "",
   },
-  categories: [],
+  categories: ["bar", "restaurant", "cafe", "other", "food", "pet", "travel", "shopping"],
   comments: []
 };
 
@@ -103,7 +103,7 @@ export const GlobalProvider = ({ children }) => {
   }
   return (
     <GlobalContext.Provider
-      value={{ user: state.user, transactions: state.transactions, filters: state.filters, editTransaction, addTransaction, deleteTransaction, setFilters, setUser }}
+      value={{ user: state.user, transactions: state.transactions, filters: state.filters, categories: state.categories, editTransaction, addTransaction, deleteTransaction, setFilters, setUser }}
     >
       {children}
     </GlobalContext.Provider>
