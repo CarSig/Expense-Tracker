@@ -31,6 +31,8 @@ const Charts = ({ amountsArray, categoriesArray }) => {
                     "rgba(153, 102, 255, 1)",
                     "rgba(255,159,64,1)",
                     "rgba(255, 99, 132, 1)",
+                    "rgba(155, 99, 122, 1)",
+
 
                 ],
             }],

@@ -16,7 +16,9 @@ const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 function App() {
   const { transactions, user } = useContext(GlobalContext);
 
-
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
 
 
@@ -92,6 +94,7 @@ function App() {
             <Route path="/statistics" exact element={<Chart />} />
           </Routes>
         </BrowserRouter>
+
       </GlobalProvider>
 
     </div>

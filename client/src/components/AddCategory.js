@@ -8,7 +8,7 @@ const AddCategory = () => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
     return (
-        <div > <input type="text" name="newCategory" placeholder="add new category" className="my-1" />
+        <div className="categoryInput"> <input type="text" name="newCategory" placeholder="add new category" className="my-1" />
         </div>
     )
 }

@@ -2,30 +2,31 @@ import React, { useState, useContext } from "react";
 import { useForm } from "../customHooks/useForm";
 import AddCategory from "./AddCategory";
 import { GlobalContext } from "../context/GlobalState";
+import axios from "axios";
 
 
 
 
 
 const AddExpense = () => {
-  const { categories } = useContext(GlobalContext);
-
+  const { categories, user } = useContext(GlobalContext);
 
   let formattedDate = new Date().toISOString().slice(0, 10);
-  const [values, handleChange, onSubmit] = useForm({ amount: 0, category: "select", comment: "", date: formattedDate, _id: "" });
+  const [values, handleChange, onSubmit] = useForm({ amount: 0, category: "select", comment: "", date: formattedDate, newCategory: "" });
   const [isNewCategory, setIsNewCategory] = useState(false);
 
 
   return (
     <main className="container">
-      <form onSubmit={onSubmit}>
+      <form >
         <h2 className="large text-primary">Add Expense</h2>
         <input type="number" name="amount" value={values.amount} placeholder="amount" className="my-1" onChange={handleChange} />
         {//TODO: 1.input affects state
           //2.color picker
         }
         <div className="categoryInput">
-          {isNewCategory ? <AddCategory /> : <select name="category" id="category" value={values.category} className="my-1" onChange={handleChange}>
+          {isNewCategory ? <div className="categoryInput"> <input type="text" name="newCategory" placeholder="add new category" className="my-1" onChange={handleChange} value={values.newCategory} />
+          </div> : <select name="category" id="category" value={values.category} className="my-1" onChange={handleChange}>
             <option value="select" disabled hidden>
               Select Category
             </option>
@@ -51,10 +52,10 @@ const AddExpense = () => {
           <label htmlFor="repeat">Make repeating</label>
         </div>
 
-        <button className="btn btn-primary my-2">Submit</button>
+        <button onClick={onSubmit} className="btn btn-primary my-2">Submit</button>
       </form>
 
-      <a href="/" className="btn ">
+      <a href="/transactions" className="btn ">
         See transactions
       </a>
     </main>

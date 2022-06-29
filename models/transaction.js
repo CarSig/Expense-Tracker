@@ -5,9 +5,11 @@ const TransactionSchema = new Schema({
   amount: { type: Number, required: [true, "Please add a positive or negative number"] },
   category: { type: String, required: true },
   comment: { type: String },
-  date: { type: Array, default: [] },
-  // user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: [true, "User ID is required"] },
+  date: { type: String },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
+  repeating: { type: String, default: "no" },
+
 });
-const Transaction = mongoose.model("Transactions", TransactionSchema);
+const Transaction = mongoose.model("Transaction", TransactionSchema);
 
 module.exports = Transaction;

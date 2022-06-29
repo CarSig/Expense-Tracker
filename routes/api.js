@@ -10,6 +10,7 @@ router.post("/login", userController.login);
 router.get("/users/:id", userController.findOneUser);
 router.get("/logged", userController.findOneUser);
 router.put("/users/:id", userController.updateUser);
+router.patch("/users/new/:id", userController.updateUserTransaction);
 router.get("/users", userController.findAllUsers);
 //TRANSACTION
 

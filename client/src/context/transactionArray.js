@@ -10,6 +10,7 @@ const getRandomDate = () => {
 };
 
 
+const categoryArray = ["bar", "restaurant", "cafe", "other", "food", "pet", "travel", "shopping"]
 
 
 const generateTransactions = (count) => {
@@ -18,7 +19,8 @@ const generateTransactions = (count) => {
     transactions.push({
       _id: i,
       amount: Math.floor(Math.random() * 200) - 100,
-      category: ["shopping", "food", "pet", "travel", "bar", "culture"][Math.floor(Math.random() * 6)],
+
+      category: categoryArray[Math.floor(Math.random() * categoryArray.length)],
       comment: getRandomCity(),
       date: getRandomDate(),
       repeating: Math.random() > 0.1,

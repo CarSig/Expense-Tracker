@@ -20,7 +20,7 @@ exports.findOneUser = async (req, res) => {
 
 exports.findAllUsers = async (req, res) => {
 
-    await User.find().then((data) => {
+    await User.find().populate("transactions").then((data) => {
         res.json(data);
     })
         .catch((error) => {
@@ -48,7 +48,7 @@ exports.login = async (req, res) => {
     const user = await User.findOne({
         username: req.body.username,
         password: req.body.password,
-    });
+    }).populate("transactions")
 
     // AUTHORIZATION 1:)
 
@@ -77,11 +77,41 @@ exports.deleteUser = (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body.user, { new: true }, (error, updatedData) => {
+
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, updatedData) => {
         if (error) {
             console.log("error" + error);
         } else {
-            console.log("data" + req.params);
+            console.log("data" + JSON.stringify(req.params));
+            console.log("data" + JSON.stringify(req.body));
         }
     });
+
 };
+exports.updateUserTransaction = async (req, res) => {
+    const data = req.body;
+    const newTransaction = new Transaction(data);
+    await newTransaction.save((error) => {
+        if (error) {
+            res.status(500).json({ msg: "Ooops, something happened with the server" });
+            console.log(error);
+        } else {
+            User.findOneAndUpdate({ username: "lb" }, { $push: { transactions: newTransaction } }).then((data) => {
+                console.log(data);
+            }
+            ).catch((error) => {
+                console.log(error);
+            }
+            );
+            res.status(200).json({ msg: "Your data has been saved!!!" });
+        }
+    }
+    );
+}
+
+
+
+
+
+
+// db.users.updateOne({ username: "usr" }, { $push: { transactions: transaction } })

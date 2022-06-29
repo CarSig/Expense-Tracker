@@ -21,6 +21,8 @@ const Login = () => {
     setValues({ ...values, [input]: e.target.value });
   };
 
+
+
   const loginUser = async (e) => {
     e.preventDefault();
 
@@ -44,16 +46,6 @@ const Login = () => {
       localStorage.setItem("userData", JSON.stringify(data.data.userData));
       localStorage.setItem("username", payload.username);
 
-      // axios
-      // .get("api/users")
-      // .then(async (response) => {
-      //     const data = await response.data;
-
-      //     setUser(data);
-      // })
-      // .catch((err) => {
-      //     console.log(err);
-      // });
 
       // novi axios call GET - users/:id - za dobavljanje usera
       const update = await data.data.userData
@@ -68,6 +60,7 @@ const Login = () => {
       }).then(async (response) => {
         const data = await response.data;
         setUser(data);
+
       }
       ).catch((err) => {
         console.log(err);
@@ -78,6 +71,7 @@ const Login = () => {
     } else {
       setInvalidCredentials(true);
     }
+    return data
   };
 
   return (

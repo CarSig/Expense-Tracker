@@ -6,13 +6,11 @@ import { transactionArray } from "./transactionArray";
 
 
 
+
+
 const initialState = {
   transactions: transactionArray,
-  user:
-  {
-    a: "aaa",
-    b: "bbb"
-  },
+  user: JSON.parse(localStorage.getItem("user")) || null,
   filters: {
     startDate: "",
     endDate: "",
@@ -47,7 +45,7 @@ export const GlobalProvider = ({ children }) => {
       type: "DELETE_TRANSACTION",
       payload: id,
     });
-    console.log(id);
+
   }
 
   function addTransaction(transaction) {
