@@ -96,7 +96,7 @@ exports.updateUserTransaction = async (req, res) => {
             res.status(500).json({ msg: "Ooops, something happened with the server" });
             console.log(error);
         } else {
-            User.findOneAndUpdate({ username: "lb" }, { $push: { transactions: newTransaction } }).then((data) => {
+            User.findOneAndUpdate({ _id: req.params.id }, { $push: { transactions: newTransaction } }).then((data) => {
                 console.log(data);
             }
             ).catch((error) => {
