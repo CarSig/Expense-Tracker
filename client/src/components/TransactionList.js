@@ -87,7 +87,7 @@ const TransactionList = () => {
   return (
     <main className="container">
 
-      <h2 className="large text-primary">History</h2>
+      <h1 className="xl text-primary">Dashboard</h1>
       <Balance />
       <IncomeExpenses />
       <br />
@@ -97,8 +97,6 @@ const TransactionList = () => {
       <br />
 
 
-      <h3>Filters</h3>
-      <pre>{localStorage.getItem("filters")}</pre>
       <br />
       <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
 

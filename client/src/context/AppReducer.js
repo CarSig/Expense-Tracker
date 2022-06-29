@@ -27,7 +27,11 @@ export default (state, action) => {
         user: action.payload,
       };
 
-
+    case "SET_CATEGORIES":
+      return {
+        ...state,
+        categories: action.payload,
+      };
 
     default:
       return state;

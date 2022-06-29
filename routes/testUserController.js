@@ -30,7 +30,7 @@ exports.findAllUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-    console.log("Body: ", req.body);
+
     const data = req.body;
     const newUser = new User(data);
 
@@ -50,7 +50,7 @@ exports.login = async (req, res) => {
         password: req.body.password,
     });
 
-    // AU'UTHORIZATION 1:)
+    // AUTHORIZATION 1:)
 
     if (user) {
         const token = jwt.sign(

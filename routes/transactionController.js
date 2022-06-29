@@ -7,8 +7,6 @@ exports.postTransaction = (req, res) => {
   console.log("Body: ", req.body);
   const data = req.body;
   const newTransaction = new Transaction(data);
-
-  // . save()
   newTransaction.save((error) => {
     if (error) {
       res.status(500).json({ msg: "Ooops, something happened with the server" });

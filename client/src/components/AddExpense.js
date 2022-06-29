@@ -4,6 +4,9 @@ import AddCategory from "./AddCategory";
 import { GlobalContext } from "../context/GlobalState";
 
 
+
+
+
 const AddExpense = () => {
   const { categories } = useContext(GlobalContext);
 

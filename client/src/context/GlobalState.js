@@ -1,47 +1,18 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import { transactionArray } from "./transactionArray";
-import axios from "axios";
 
-// const ovoTest = () => {
-//   axios
-//     .get("api/users")
-//     .then(async (response) => {
-//       const data = await response.data;
 
-//       return data;
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }
 
-// const getUser = async () => {
-//   const token = localStorage.getItem("token");
-//   if (token) {
-//     const response = await axios.get("/api/users/62ac22d414c706292634478f", {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     return response.data.user;
-//   }
-
-//   return null;
-// }
 
 
 const initialState = {
-
   transactions: transactionArray,
-
   user:
   {
     a: "aaa",
     b: "bbb"
   },
-
-
   filters: {
     startDate: "",
     endDate: "",
@@ -101,9 +72,17 @@ export const GlobalProvider = ({ children }) => {
     });
     console.log(filters)
   }
+
+  function setCategories(categories) {
+    dispatch({
+      type: "SET_CATEGORIES",
+      payload: categories,
+    });
+  }
+
   return (
     <GlobalContext.Provider
-      value={{ user: state.user, transactions: state.transactions, filters: state.filters, categories: state.categories, editTransaction, addTransaction, deleteTransaction, setFilters, setUser }}
+      value={{ user: state.user, transactions: state.transactions, filters: state.filters, categories: state.categories, editTransaction, addTransaction, deleteTransaction, setFilters, setUser, setCategories }}
     >
       {children}
     </GlobalContext.Provider>
