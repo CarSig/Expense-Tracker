@@ -1,4 +1,5 @@
-POPULATE 1 user with transactions so he can be test user1
+Update user
+Add categories
 
 
 Design settings

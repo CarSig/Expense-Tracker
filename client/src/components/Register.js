@@ -5,7 +5,7 @@ import axios from "axios";
 import { BsPersonPlusFill } from "react-icons/bs";
 import { useForm } from "../customHooks/useForm";
 
-const Register = () => {
+const Register = ({ setRoute }) => {
 
   const [values, handleChange] = useForm({
     username: "",
@@ -74,7 +74,7 @@ const Register = () => {
       {signedUser === null && (
         <div>
           <p className="my-1">
-            Already have an account? <Link to="/login"> Sign in</Link>
+            Already have an account?
           </p>
         </div>
       )}

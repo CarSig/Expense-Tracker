@@ -14,7 +14,10 @@ const AddExpense = () => {
   const [values, handleChange, onSubmit] = useForm({ amount: 0, category: "select", comment: "", date: formattedDate, newCategory: "" });
   const [isNewCategory, setIsNewCategory] = useState(false);
 
-
+  const toggleCategory = (e) => {
+    e.preventDefault()
+    setIsNewCategory(!isNewCategory)
+  }
   return (
     <main className="container">
       <form >
@@ -37,7 +40,7 @@ const AddExpense = () => {
 
           </select>}
 
-          <button className={`btn btn-${isNewCategory ? "secondary" : "primary"}`} onClick={() => { setIsNewCategory(!isNewCategory) }} >{`${isNewCategory ? "Select" : "Add New"}`}</button>
+          <button className={`btn btn-${isNewCategory ? "secondary" : "primary"}`} onClick={toggleCategory} >{`${isNewCategory ? "Select" : "Add New"}`}</button>
 
 
         </div>
