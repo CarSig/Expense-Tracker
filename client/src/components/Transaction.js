@@ -16,8 +16,9 @@ const Transaction = ({ transaction }) => {
           {sign} {Math.abs(transaction.amount)} €
         </p>
         <p>{transaction.category}</p>
-        <p>{transaction.date.toISOString().slice(0, 10)}</p>
-        <AiOutlineDelete className="delete" onClick={() => deleteTransaction(transaction._id)} />
+        {
+          //    <p>{transaction.date.toISOString().slice(0, 10)}</p>
+        }        <AiOutlineDelete className="delete" onClick={() => deleteTransaction(transaction._id)} />
       </div>
     </li>
   );

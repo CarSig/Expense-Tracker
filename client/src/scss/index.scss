@@ -34,7 +34,7 @@ ul {
   ul {
     display: flex;
   }
-  a {
+  .linkNavBar {
     color: #fff;
     padding: 0.45rem;
     margin: 0.25rem;
@@ -165,4 +165,16 @@ main {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+.linkNavBar11 {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: none;
+  cursor: pointer;
 }

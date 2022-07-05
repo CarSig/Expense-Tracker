@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "../customHooks/useForm";
-import AddCategory from "./AddCategory";
 import { GlobalContext } from "../context/GlobalState";
-import axios from "axios";
+
 
 
 

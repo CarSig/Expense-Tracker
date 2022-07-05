@@ -10,14 +10,23 @@ import DoughnutChart from "./charts/Charts";
 import { usePaginate } from "../customHooks/usePaginate";
 
 const TransactionList = () => {
-  const { transactions, filters } = useContext(GlobalContext);
-
+  const { transactions, filters, user } = useContext(GlobalContext);
+  console.log("!!!!", user.transactions)
   //sort transactions by date
   const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
-  const sortedTransactions = transactions.sort(sortByDate);
+  const userOBJ = JSON.parse(localStorage.getItem("userData"));
+
+  // const sortedTransactions = userOBJ.transactions // .sort(sortByDate);
+  const sortedTransactions = user.transactions // .sort(sortByDate);
+
+
 
   //Filters
   const [hideFilters, setHideFilters] = useState(true);
+
+  //Transactions
+  const [hideTransactions, setHideTransactions] = useState(true);
+
   const filteredTransactions = applyFilters(sortedTransactions, filters);
 
   const toggleFiltersWindow = (e) => {
@@ -25,10 +34,15 @@ const TransactionList = () => {
     setHideFilters(!hideFilters);
   };
 
+  const toggleTransactionsWindow = (e) => {
+    e.preventDefault();
+    setHideTransactions(!hideTransactions);
+  }
+
   //Pagination
   const [transactionsPerPage, totalTransactions, currentPage, paginate, currentTransactions] = usePaginate(filteredTransactions);
 
-  //TODO: refacator to separate components
+  //TODO: refactor to separate components
   //-------CHARTS logic-----------
 
   const categories = [...new Set(filteredTransactions.map((transaction) => transaction.category))];
@@ -75,9 +89,11 @@ const TransactionList = () => {
       <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
       <DoughnutChart amountsArray={amountsArray} categoriesArray={categoriesArray} />
 
+      <button onClick={toggleTransactionsWindow}>{hideTransactions ? "Show Transacitons" : "Hide Transactions"}</button>
       <div className="transactions">
+
         <ul>
-          {currentTransactions.map((transaction) => {
+          {user && currentTransactions.map((transaction) => {
             return <Transaction key={transaction._id} transaction={transaction} />;
           })}
         </ul>

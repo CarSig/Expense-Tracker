@@ -1,6 +1,5 @@
-import { set } from "mongoose";
+
 import React, { useState, useContext, useEffect } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
 import AddExpense from "./components/AddExpense";
 import NavBar from "./components/NavBar";
 import TransactionList from "./components/TransactionList";
@@ -14,89 +13,80 @@ import Chart from "./components/Chart";
 const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
 function App() {
-  const { transactions, user } = useContext(GlobalContext);
+
+  const { transactions, user, setUser, } = useContext(GlobalContext);
+  const [route, setRoute] = useState("/");
+
+
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-
-
   //THEME
   let themeStorage = localStorage.getItem("theme");
   const [theme, setTheme] = useState(themeStorage || "light");
   const [counter, setCounter] = useState(+localStorage.getItem("counter") || 0);
+
   useEffect(() => {
     setTheme(themes[counter]);
     window.localStorage.setItem("theme", `${themes[counter]}`);
   }, [counter]);
 
-  const scrollTheme = (input) => {
+
+  const scrollTheme = input => {
     if (input === "up") {
-      if (counter < themes.length - 1) {
-        setCounter(counter + 1);
-      } else {
-        setCounter(0);
-      }
+      counter < themes.length - 1 ? setCounter(counter + 1) : setCounter(0)
     } else {
-      if (counter > 0) {
-        setCounter(counter - 1);
-      } else {
-        setCounter(themes.length - 1);
-      }
-    }
+      counter > 0 ? setCounter(counter - 1) : setCounter(themes.length - 1)
+    };
+
     window.localStorage.setItem("counter", `${counter + 1}`);
   };
+
+
+
+
+
+
 
   return (
     <div className={`${theme} theme`}>
       <GlobalProvider>
-        <NavBar />
+
+        <NavBar route={route} setRoute={setRoute} />
         <br />
         <br />
         <br />
 
-        <div
-          className="btn"
-          onClick={() => {
-            scrollTheme("down");
-          }}
-        >
-          {"Back" || "--End--"}
+        <div style={{}}>
+          <div className="btn" onClick={() => { scrollTheme("down"); }}>
+            {"Back" || "--End--"}
+          </div>
+
+          <div className="btn" onClick={() => { scrollTheme("up"); }}>
+            {"Next" || "--End--"}
+          </div>
+
+
+
+          {route === "/transactions" && <TransactionList />}
+          {route === "/add" && <AddExpense />}
+          {route === "/chart" && <Chart />}
+          {route === "/settings" && <Settings />}
+
+
+          {
+            // if not logged in
+            false &&
+            <div>
+              {route === "/login" && <Login setRoute={setRoute} />}
+              {route === "/register" && <Register setRoute={setRoute} />}
+              {route === "/landing" && <Landing setRoute={setRoute} />}</div>}
         </div>
-
-        <div
-          className="btn"
-          onClick={() => {
-            scrollTheme("up");
-          }}
-        >
-          {"Next" || "--End--"}
-        </div>
-
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              exact
-              element={
-                <div>
-                  <TransactionList />
-                </div>
-              }
-            />
-
-            <Route path="/add" exact element={<AddExpense />} />
-            <Route path="/" exact element={<Landing />} />
-            <Route path="/login" exact element={<Login />} />
-            <Route path="/register" exact element={<Register />} />
-            <Route path="/settings" exact element={<Settings />} />
-            <Route path="/statistics" exact element={<Chart />} />
-          </Routes>
-        </BrowserRouter>
+        <Login />
 
       </GlobalProvider>
-
     </div>
   );
 }

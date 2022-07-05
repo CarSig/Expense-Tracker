@@ -21,33 +21,41 @@ import axios from "axios";
 // }, [])
 
 
+let callUser = axios.get("/api/context").then((res) => {
+  const result = res.data;
+  console.log(result);
+  return result
+});
 
 
 
+// const initialState = { ...data, categories: ["bar", "restaurant", "cafe", "other", "food", "pet", "travel", "shopping"] }
 
-const initialState = {
-  transactions: transactionArray,
-  user: "STARO",
-  filters: {
-    startDate: "",
-    endDate: "",
-    minAmount: "",
-    maxAmount: "",
-    category: "",
-    comment: "",
-    repeat: "",
-  },
-  categories: ["bar", "restaurant", "cafe", "other", "food", "pet", "travel", "shopping"],
-  comments: [],
-  route: "/",
-};
+
 
 //Create context
-export const GlobalContext = createContext(initialState);
+const Context = React.createContext({});
+export const GlobalContext = init => createContext(Context);
 
 //Provider component
 export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [state, dispatch] = useReducer(AppReducer, Context);
+
+
+  const getAffiliates = async () => {
+    setLoading(true)
+    const newText = await callUser();
+    setData(newText)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getAffiliates()
+  }, [])
+
+
 
   function setUser(user) {
     dispatch({
@@ -71,7 +79,6 @@ export const GlobalProvider = ({ children }) => {
       type: "ADD_TRANSACTION",
       payload: transaction,
     });
-    alert("Transaction added")
 
   }
 
@@ -95,16 +102,10 @@ export const GlobalProvider = ({ children }) => {
       payload: categories,
     });
   }
-  function setRoute(route) {
-    dispatch({
-      type: "SET_ROUTE",
-      payload: route,
-    });
-  }
 
   return (
     <GlobalContext.Provider
-      value={{ user: state.user, transactions: state.transactions, filters: state.filters, categories: state.categories, editTransaction, addTransaction, deleteTransaction, setFilters, setUser, setCategories, setRoute }}
+      value={{ loading, transactions: data.transactions, editTransaction, addTransaction, deleteTransaction, setFilters, setUser, setCategories }}
     >
       {children}
     </GlobalContext.Provider>

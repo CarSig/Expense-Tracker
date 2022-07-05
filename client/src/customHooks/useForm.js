@@ -6,7 +6,7 @@ import { GlobalContext } from "../context/GlobalState";
 
 
 export const useForm = (initialValues) => {
-  const { addTransaction, user } = useContext(GlobalContext);
+  const { addTransaction, user, setUser } = useContext(GlobalContext);
   const [values, setValues] = useState(initialValues);
 
   const handleChange = (e) => {
@@ -25,22 +25,55 @@ export const useForm = (initialValues) => {
       user: user._id,
       repeating: values.repeating,
     };
-
-    console.log("type: ", newTransaction);
+    console.log("here: ", newTransaction);
     // find and update user 
-    await axios.patch(`/api/users/new/${user._id}`,
 
+    const usr = JSON.parse(localStorage.getItem("userData"));
+    const id = usr._id;
+    const token = localStorage.getItem("token");
+
+
+    axios.patch(`/api/users/new/${user._id}`,
       newTransaction
-    ).then((res) => {
-
-      console.log(res.data);
+    ).then(async (res) => {
+      const response = await res.data //.populate("transactions").exec()
+      console.log("yyea: " + JSON.stringify(response))
+      setUser(res.data.updatedUser);
     }
     ).catch((err) => {
       console.log(err);
     }
-    )
+    ).then(axios({ // ovo mozda ni ne treba, ako mogu na setUser staviti ono sto je pod yyea
+      url: "/api/users/new/" + id,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(async (response) => {
+      const data = await response.data;
+      localStorage.setItem("userData", JSON.stringify(data));
+      console.log("data?==: ", data);
+      setUser(data);
+
+    }
+    ).catch((err) => {
+      console.log(err);
+    }
+    ))
+
+
+
 
   };
+
+
+
+
+
+
+
+
+
 
   return [values, handleChange, onSubmit];
 };

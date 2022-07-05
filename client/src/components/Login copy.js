@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 
 import { FiLogIn } from "react-icons/fi";
 import { GlobalContext } from "../context/GlobalState";
@@ -29,15 +29,6 @@ const Login = () => {
   const loginUser = async (e) => {
     e.preventDefault();
 
-
-    let callUser = await axios.get("/api/context").then((res) => {
-      const result = res.data
-
-      return result
-    });
-
-    const contextUser = await callUser;
-
     const payload = {
       username: values.username,
       password: values.password,
@@ -51,33 +42,20 @@ const Login = () => {
 
     const data = await response;
 
-
-
-
     // AUTHENTICATION 2
     if (data.data.user) {
 
       localStorage.setItem("token", data.data.user);
-      // localStorage.setItem("??", JSON.stringify(contextUser));
-      // console.log("??", JSON.stringify(contextUser));
-
       localStorage.setItem("userData", JSON.stringify(data.data.userData));
-      // console.log("userData!!", JSON.stringify(data.data.userData));
-      setUser(data.data.userData);
-      const uo = JSON.parse(localStorage.getItem("userData"))
-      // console.log("from storage", JSON.stringify(uo.transactions));
       localStorage.setItem("username", payload.username);
-      setUser(data.data.userData);
+
 
       // novi axios call GET - users/:id - za dobavljanje usera
-      const log = await data.data.userData
+      const update = await data.data.userData
       const token = localStorage.getItem("token");
 
-
-
-
-      axios({
-        url: "api/users/new/" + log._id,
+      await axios({
+        url: "api/users/" + update._id,
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -85,16 +63,14 @@ const Login = () => {
       }).then(async (response) => {
         const data = await response.data;
         setUser(data);
-        setUser(contextUser)
+
       }
       ).catch((err) => {
         console.log(err);
       }
       );
-
-
       setInvalidCredentials(false);
-
+      window.location.href = "/settings";
     } else {
       setInvalidCredentials(true);
     }
@@ -121,7 +97,7 @@ const Login = () => {
       </form>
 
       <p className="my-1">
-        Don't have an account? <a > Register</a>
+        Don't have an account? <Link to="/register"> Register</Link>
       </p>
     </section>
   );

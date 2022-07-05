@@ -33,6 +33,11 @@ export default (state, action) => {
         categories: action.payload,
       };
 
+    case "SET_ROUTE":
+      return {
+        ...state,
+        route: action.payload,
+      };
     default:
       return state;
   }

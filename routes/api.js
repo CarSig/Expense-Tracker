@@ -7,11 +7,13 @@ const userController = require("./testUserController");
 //USER
 router.post("/register", userController.register);
 router.post("/login", userController.login);
-router.get("/users/:id", userController.findOneUser);
+// router.get("/getUserData/:id", userController.getUserData);
+router.get("/users/new/:id", userController.findOneUser);
 router.get("/logged", userController.findOneUser);
 router.put("/users/:id", userController.updateUser);
 router.patch("/users/new/:id", userController.updateUserTransaction);
 router.get("/users", userController.findAllUsers);
+router.get("/context", userController.context);
 //TRANSACTION
 
 router.post("/transaction", transactionController.postTransaction);

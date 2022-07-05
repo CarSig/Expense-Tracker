@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+
 import axios from "axios";
 
 import { BsPersonPlusFill } from "react-icons/bs";
 import { useForm } from "../customHooks/useForm";
 
 const Register = () => {
+
   const [values, handleChange] = useForm({
     username: "",
-    firstname: "",
+    firstName: "",
     lastName: "",
     address: "",
     role: "",
@@ -18,7 +19,7 @@ const Register = () => {
     gender: "",
   });
 
-  const navigate = useNavigate();
+
 
   //TODO: authorization
   const signedUser = localStorage.getItem("username");
@@ -44,8 +45,8 @@ const Register = () => {
     })
       .then(() => {
         console.log("Data has been sent to the server");
-        signedUser === null ? navigate("/login") : navigate("/");
         alert("Registration was successful");
+        signedUser === null ? setRoute("/login") : setRoute("/transactions")
       })
       .catch((error) => {
         console.log(payload);
@@ -55,7 +56,7 @@ const Register = () => {
 
   return (
     <section className="container">
-      <h1 className="large text-primary">{signedUser === null ? "Registration" : "Add new user"}</h1>
+      <h1 className="large text-primary">Registration</h1>
       <p className="lead">
         <BsPersonPlusFill />
         Create new account{" "}

@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
-const NavBar = () => {
+
+
+const NavBar = ({ route, setRoute }) => {
   const [signed, setSigned] = useState("");
+  // const { route, setRoute } = useContext(GlobalContext);
+
+
+
 
   useEffect(() => {
     const storedAuthToken = localStorage.getItem("username");
@@ -12,7 +19,7 @@ const NavBar = () => {
   const signOut = () => {
     localStorage.removeItem("username");
     localStorage.removeItem("token");
-    window.location.href = "/";
+    setRoute("/");
   };
   return (
     <div className="header">
@@ -20,35 +27,37 @@ const NavBar = () => {
         <div>
           <h1>
             {" "}
-            <a href="/">Expense Tracker</a>
+            <a onClick={(() => setRoute("/"))}>Expense Tracker</a>
           </h1>
 
         </div>
         <small color="textSecondary">hello {signed}</small>
 
         <ul>
-          <li>
-            <a href="/add">Add new transaction</a>
+          <li className="linkNavBar">
+
+            <p onClick={(() => setRoute("/add"))}>Add new transaction</p>
           </li>
-          <li>
-            <a href="/">Transactions</a>
+          <li className="linkNavBar">
+            <p onClick={(() => setRoute("/transactions"))} > Transactions</p>
           </li>
-          <li>
-            <a href="/statistics">Statistics</a>
+          <li className="linkNavBar">
+            <p onClick={(() => setRoute("/statistics"))}>Statistics</p>
           </li>
-          <li>
-            <a href="/settings">Settings</a>
+          <li className="linkNavBar">
+            <p onClick={(() => setRoute("/settings"))}>Settings</p>
           </li>
-          <li>
-            <a href="login" color="default" onClick={signOut}>
+          <li><button onClick={(() => setRoute("/login"))}> Login</button></li>
+          <li className="linkNavBar">
+            <p color="default" onClick={signOut}>
               Sign out
-            </a>
+            </p>
           </li>
         </ul>
 
       </nav>
 
-    </div>
+    </div >
   );
 };
 

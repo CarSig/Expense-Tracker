@@ -15,9 +15,9 @@ const Settings = () => {
 
         <div>
             <h2>Settings</h2>
+
             <pre>{user.email}</pre>
             <pre>{JSON.stringify(user, null, 2)}</pre>
-
 
 
         </div >

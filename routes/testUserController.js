@@ -8,7 +8,7 @@ const toId = mongoose.Types.ObjectId;
 exports.findOneUser = async (req, res) => {
 
     console.log("params: ", req.params.id);
-    await User.findOne({ _id: req.params.id }).then((data) => {
+    await User.findById(req.params.id).populate("transactions").then((data) => {
         // console.log("data user JEE: ", data);
         return res.json(data);
     })
@@ -29,6 +29,18 @@ exports.findAllUsers = async (req, res) => {
         });
 };
 
+
+exports.context = async (req, res) => {
+    const user = await User.findOne({ username: "lb" }).populate("transactions").then((data) => {
+        res.json(data);
+    }).catch((error) => {
+        console.log("Error: ", error);
+        res.json(data);
+    })
+}
+
+
+
 exports.register = async (req, res) => {
 
     const data = req.body;
@@ -43,6 +55,20 @@ exports.register = async (req, res) => {
         }
     });
 };
+
+
+
+
+exports.getUserData = async (req, res) => {
+    console.log("params: ", typeof req.params.id);
+
+    const user = await User.findOne({
+        _id: req.params.id,
+
+    }).populate("transactions")
+    return res.json(user);
+}
+
 
 exports.login = async (req, res) => {
     const user = await User.findOne({
@@ -96,17 +122,17 @@ exports.updateUserTransaction = async (req, res) => {
             res.status(500).json({ msg: "Ooops, something happened with the server" });
             console.log(error);
         } else {
-            User.findOneAndUpdate({ _id: req.params.id }, { $push: { transactions: newTransaction } }).then((data) => {
-                console.log(data);
-            }
-            ).catch((error) => {
-                console.log(error);
-            }
-            );
-            res.status(200).json({ msg: "Your data has been saved!!!" });
+            User.findByIdAndUpdate(req.params.id, { $push: { transactions: newTransaction } }, { new: true }, (error, updatedData) => {
+
+                if (error) { console.log("error" + error); } else {
+                    res.status(200).json({ msg: "Your data has been saved!!!", newTransaction: newTransaction, updatedUser: updatedData });
+
+                }
+            }).populate("transactions");
+
+
         }
-    }
-    );
+    })
 }
 
 
