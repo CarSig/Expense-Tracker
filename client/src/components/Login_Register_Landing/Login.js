@@ -8,11 +8,12 @@ import axios from "axios";
 const Login = () => {
   const [values, setValues] = useState({ username: "", password: "" });
   const [invalidCredentials, setInvalidCredentials] = useState(false);
-  const { setUser, user } = useContext(GlobalContext);
+  const { setUser, user, signedIn, setSignedIn, setRoute } = useContext(GlobalContext);
 
   useEffect(() => {
     // update localStorage filters
     localStorage.setItem("user", JSON.stringify(user));
+
   }, [user]);
 
 
@@ -29,14 +30,14 @@ const Login = () => {
   const loginUser = async (e) => {
     e.preventDefault();
 
+    // setSignedIn(true)
+    // let callUser = await axios.get("/api/context").then((res) => {
+    //   const result = res.data
 
-    let callUser = await axios.get("/api/context").then((res) => {
-      const result = res.data
+    //   return result
+    // });
 
-      return result
-    });
-
-    const contextUser = await callUser;
+    // const contextUser = await callUser;
 
     const payload = {
       username: values.username,
@@ -56,15 +57,15 @@ const Login = () => {
 
     // AUTHENTICATION 2
     if (data.data.user) {
-
+      const userLog = await data.data.userData
       localStorage.setItem("token", data.data.user);
 
 
       localStorage.setItem("userData", JSON.stringify(data.data.userData));
-      setUser(data.data.userData);
+
 
       localStorage.setItem("username", payload.username);
-      setUser(data.data.userData);
+      setUser(userLog);
 
       // novi axios call GET - users/:id - za dobavljanje usera
       const log = await data.data.userData
@@ -73,21 +74,21 @@ const Login = () => {
 
 
 
-      axios({
-        url: "api/users/new/" + log._id,
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(async (response) => {
-        const data = await response.data;
-        setUser(data);
-        setUser(contextUser)
-      }
-      ).catch((err) => {
-        console.log(err);
-      }
-      );
+      // axios({
+      //   url: "api/users/new/" + log._id,
+      //   method: "GET",
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }).then(async (response) => {
+      //   const data = await response.data;
+      //   setUser(data);
+      //   setUser(contextUser)
+      // }
+      // ).catch((err) => {
+      //   console.log(err);
+      // }
+      // );
 
 
       setInvalidCredentials(false);
@@ -95,6 +96,8 @@ const Login = () => {
     } else {
       setInvalidCredentials(true);
     }
+    setRoute("/")
+    setSignedIn(true)
     return data
   };
 

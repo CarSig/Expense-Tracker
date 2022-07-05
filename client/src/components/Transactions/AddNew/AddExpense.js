@@ -1,14 +1,15 @@
 import React, { useState, useContext } from "react";
-import { useForm } from "../../customHooks/useForm";
-import { GlobalContext } from "../../context/GlobalState";
+import { useForm } from "../../../customHooks/useForm";
+import { GlobalContext } from "../../../context/GlobalState";
+import ColorPicker from "../../utils/ColorPicker";
 
 
 
 
 
 
-const AddExpense = () => {
-  const { categories, user } = useContext(GlobalContext);
+const AddExpense = ({ setRoute }) => {
+  const { categories, user, route } = useContext(GlobalContext);
 
   let formattedDate = new Date().toISOString().slice(0, 10);
   const [values, handleChange, onSubmit] = useForm({ amount: 0, category: "select", comment: "", date: formattedDate, newCategory: "" });
@@ -20,6 +21,7 @@ const AddExpense = () => {
   }
   return (
     <main className="container">
+      <pre>{route}</pre>
       <form >
         <h2 className="large text-primary">Add Expense</h2>
         <input type="number" name="amount" value={values.amount} placeholder="amount" className="my-1" onChange={handleChange} />
@@ -28,7 +30,7 @@ const AddExpense = () => {
         }
         <div className="categoryInput">
           {isNewCategory ? <div className="categoryInput"> <input type="text" name="newCategory" placeholder="add new category" className="my-1" onChange={handleChange} value={values.newCategory} />
-          </div> : <select name="category" id="category" value={values.category} className="my-1" onChange={handleChange}>
+            <br></br><ColorPicker /></div> : <select name="category" id="category" value={values.category} className="my-1" onChange={handleChange}>
             <option value="select" disabled hidden>
               Select Category
             </option>
@@ -57,9 +59,9 @@ const AddExpense = () => {
         <button onClick={onSubmit} className="btn btn-primary my-2">Submit</button>
       </form>
 
-      <a href="/transactions" className="btn ">
+      <button className="btn" onClick={() => { setRoute("/") }}>
         See transactions
-      </a>
+      </button>
     </main>
   );
 };

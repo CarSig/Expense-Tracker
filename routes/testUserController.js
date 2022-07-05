@@ -114,7 +114,7 @@ exports.updateUser = async (req, res) => {
     });
 
 };
-exports.updateUserTransaction = async (req, res) => {
+exports.addNewTransaction = async (req, res) => {
     const data = req.body;
     const newTransaction = new Transaction(data);
     await newTransaction.save((error) => {
@@ -133,6 +133,16 @@ exports.updateUserTransaction = async (req, res) => {
 
         }
     })
+}
+
+
+exports.deleteTransaction = async (req, res) => {
+    User.findByIdAndUpdate(req.params.id, { $pull: { transactions: { _id: req.params.transactionId } } }, { new: true }, (error, updatedData) => {
+        if (error) { console.log("error" + error); } else {
+            res.status(200).json({ msg: "Transaction deleted!", updatedUser: updatedData });
+        }
+    }
+    ).populate("transactions");
 }
 
 

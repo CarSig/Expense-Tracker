@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../../context/GlobalState";
+import { GlobalContext } from "../../../context/GlobalState";
 import Balance from "./Balance";
 import Filters from "./Filters";
 import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
-import { useFilters, applyFilters } from "../../customHooks/useFilters";
+import { useFilters, applyFilters } from "../../../customHooks/useFilters";
 import Pagination from "./Pagination";
-import DoughnutChart from "../charts/Charts";
-import { usePaginate } from "../../customHooks/usePaginate";
+import DoughnutChart from "../../utils/Charts";
+import { usePaginate } from "../../../customHooks/usePaginate";
 
 const TransactionList = () => {
   const { transactions, filters, user } = useContext(GlobalContext);

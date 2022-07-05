@@ -38,6 +38,12 @@ export default (state, action) => {
         ...state,
         route: action.payload,
       };
+
+    case "SET_SIGNED_IN":
+      return {
+        ...state,
+        signedIn: action.payload,
+      };
     default:
       return state;
   }

@@ -1,25 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-
-
-const NavBar = ({ route, setRoute }) => {
-  const [signed, setSigned] = useState("");
+const NavBar = ({ route, }) => {
+  const { signedIn, setSignedIn, setRoute, user } = useContext(GlobalContext)
   // const { route, setRoute } = useContext(GlobalContext);
 
 
-
-
   useEffect(() => {
-    const storedAuthToken = localStorage.getItem("username");
-    setSigned(storedAuthToken);
-    console.log(signed);
+    const storedAuthToken = localStorage.getItem("username") || false;
+    // setsignedInIn(storedAuthToken);
+    console.log(signedIn);
   }, [localStorage]);
 
   const signOut = () => {
-    localStorage.removeItem("username");
+    console.log("signed in= ", signedIn)
+    setSignedIn(false);
+    console.log("signed in after= ", signedIn)
+
+    setRoute("/login");
+    // localStorage.setItem(false);
     localStorage.removeItem("token");
-    setRoute("/");
+    localStorage.removeItem("user");
+    localStorage.removeItem("payload");
+    localStorage.removeItem("userData");
+    localStorage.removeItem("id");
+    localStorage.removeItem("filters");
+    localStorage.removeItem("data");
+
   };
   return (
     <div className="header">
@@ -31,7 +38,7 @@ const NavBar = ({ route, setRoute }) => {
           </h1>
 
         </div>
-        <small color="textSecondary">hello {signed}</small>
+        <small color="textSecondary">{signedIn && `hello ${user.username}`}</small>
 
         <ul>
           <li className="linkNavBar">
@@ -39,7 +46,7 @@ const NavBar = ({ route, setRoute }) => {
             <p onClick={(() => setRoute("/add"))}>Add new transaction</p>
           </li>
           <li className="linkNavBar">
-            <p onClick={(() => setRoute("/transactions"))} > Transactions</p>
+            <p onClick={(() => setRoute("/"))} > Transactions</p>
           </li>
           <li className="linkNavBar">
             <p onClick={(() => setRoute("/statistics"))}>Statistics</p>
@@ -47,11 +54,12 @@ const NavBar = ({ route, setRoute }) => {
           <li className="linkNavBar">
             <p onClick={(() => setRoute("/settings"))}>Settings</p>
           </li>
-          <li><button onClick={(() => setRoute("/login"))}> Login</button></li>
           <li className="linkNavBar">
-            <p color="default" onClick={signOut}>
-              Sign out
-            </p>
+            {!signedIn ? <p onClick={(() => setRoute("/login"))}> Login</p>
+              :
+              <p color="default" onClick={signOut}>
+                Sign out
+              </p>}
           </li>
         </ul>
 

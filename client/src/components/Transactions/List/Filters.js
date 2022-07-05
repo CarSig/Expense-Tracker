@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useFilters } from "../../customHooks/useFilters";
-import AddCategory from "./AddCategory";
-import { GlobalContext } from "../../context/GlobalState";
+import { useFilters } from "../../../customHooks/useFilters";
+import AddCategory from "../AddNew/AddCategory";
+import { GlobalContext } from "../../../context/GlobalState";
 
 const Filters = ({ hideFilters, setHideFilters }) => {
   const [filters, handleChangeFilter, activeFilter, toggleFilterActivity, resetFilters] = useFilters()
@@ -92,8 +92,8 @@ const Filters = ({ hideFilters, setHideFilters }) => {
                 Select Category
               </option>
               {categories.map(category => (
-                <option key={category} value={category}>
-                  {category}
+                <option key={category.name} value={category.name}>
+                  {category.name}
                 </option>))}
             </select>
 

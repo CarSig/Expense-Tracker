@@ -15,20 +15,12 @@ const Charts = ({ amountsArray, categoriesArray }) => {
         setActiveChart(event.target.value);
     }
 
-
-    const colors = categories.map((category) => category.color);
-    console.log(colors);
-
     const data = {
         labels: categoriesArray,
         datasets: [
             {
-
                 data: amountsArray,
-                backgroundColor: // when fixed mistake with "select, leave only map function"
-                    [...categories.map((category) => category.color), "blue"]
-
-                ,
+                backgroundColor: categories.map((category) => category.color)
             }],
         options: {
             maintainAspectRatio: false

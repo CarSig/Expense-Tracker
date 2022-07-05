@@ -1,21 +1,27 @@
 
 import React, { useState, useContext, useEffect } from "react";
-import AddExpense from "./components/Transactions/AddExpense";
+import AddExpense from "./components/Transactions/AddNew/AddExpense";
 import NavBar from "./components/NavBar";
-import TransactionList from "./components/Transactions/TransactionList";
+import TransactionList from "./components/Transactions/List/TransactionList";
 import { GlobalProvider, GlobalContext } from "./context/GlobalState";
 import Landing from "./components/Login_Register_Landing/Landing";
 import Login from "./components/Login_Register_Landing/Login";
 import Register from "./components/Login_Register_Landing/Register";
 import Settings from "./components/Settings/Settings";
+import Main from "./Main";
+
 
 
 const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
 function App() {
 
-  const { transactions, user, setUser, } = useContext(GlobalContext);
-  const [route, setRoute] = useState("/");
+  const { transactions, user, setUser, signedIn, setSignedIn, route, setRoute } = useContext(GlobalContext);
+  useEffect(() => {
+    console.log(route)
+
+    localStorage.setItem("route", route);
+  }, [route])
 
 
   useEffect(() => {
@@ -52,41 +58,19 @@ function App() {
   return (
     <div className={`${theme} theme`}>
       <GlobalProvider>
-
-        <NavBar route={route} setRoute={setRoute} />
-        <br />
-        <br />
-        <br />
-
-        <div style={{}}>
-          <div className="btn" onClick={() => { scrollTheme("down"); }}>
-            {"Back" || "--End--"}
-          </div>
-
-          <div className="btn" onClick={() => { scrollTheme("up"); }}>
-            {"Next" || "--End--"}
-          </div>
+        <div>
+          <NavBar />
+          <br />
+          <br />
+          <br />
+          <Main scrollTheme={scrollTheme} />
 
 
-
-          {route === "/transactions" && <TransactionList />}
-          {route === "/add" && <AddExpense />}
-
-          {route === "/settings" && <Settings />}
-
-
-          {
-            // if not logged in
-            false &&
-            <div>
-              {route === "/login" && <Login setRoute={setRoute} />}
-              {route === "/register" && <Register setRoute={setRoute} />}
-              {route === "/landing" && <Landing setRoute={setRoute} />}</div>}
         </div>
-        <Login />
 
-      </GlobalProvider>
-    </div>
+
+      </GlobalProvider >
+    </div >
   );
 }
 

@@ -13,3 +13,8 @@ const TransactionSchema = new Schema({
 const Transaction = mongoose.model("Transaction", TransactionSchema);
 
 module.exports = Transaction;
+
+
+
+// TODO: also populate
+//   category: { type: Schema.Types.ObjectId, ref: "Category" },
