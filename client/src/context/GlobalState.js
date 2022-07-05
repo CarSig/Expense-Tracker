@@ -37,7 +37,7 @@ const initialState = {
     comment: "",
     repeat: "",
   },
-  categories: ["bar", "restaurant", "cafe", "other", "food", "pet", "travel", "shopping"],
+  categories: [{ name: "bar", color: "red" }, { name: "restaurant", color: "lightblue" }, { name: "cafe", color: "yellow" }, { name: "other", color: "orange" }, { name: "food", color: "purple" }, { name: "pet", color: "pink" }, { name: "travel", color: "black" }, { name: "shopping", color: "grey" }],
   comments: [],
   route: "/",
 };

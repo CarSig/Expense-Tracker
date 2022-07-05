@@ -1,12 +1,14 @@
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Line, Bar, Pie } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import { GlobalContext } from '../../context/GlobalState';
 Chart.register(...registerables);
 
 
 
 const Charts = ({ amountsArray, categoriesArray }) => {
+    const { categories } = useContext(GlobalContext);
     const [activeChart, setActiveChart] = useState("line");
 
     const handleChange = (event) => {
@@ -14,8 +16,8 @@ const Charts = ({ amountsArray, categoriesArray }) => {
     }
 
 
-
-
+    const colors = categories.map((category) => category.color);
+    console.log(colors);
 
     const data = {
         labels: categoriesArray,
@@ -23,22 +25,10 @@ const Charts = ({ amountsArray, categoriesArray }) => {
             {
 
                 data: amountsArray,
-                backgroundColor: [
-                    "rgba(255, 99, 132, 1)",
-                    "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "#f44336",
-                    "#ce93d8",
-                    "#00796B",
-                    "#FFA000",
-                    "#1de9b6",
-                    "#E64A19",
-                    "#2196f3",
-                    "#26a69a",
-                    "#90a4ae",
-                    "#8bc34a",
-                    "#a1887f",
-                ],
+                backgroundColor: // when fixed mistake with "select, leave only map function"
+                    [...categories.map((category) => category.color), "blue"]
+
+                ,
             }],
         options: {
             maintainAspectRatio: false

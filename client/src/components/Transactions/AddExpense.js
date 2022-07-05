@@ -33,8 +33,8 @@ const AddExpense = () => {
               Select Category
             </option>
             {categories.map(category => (
-              <option key={category} value={category}>
-                {category}
+              <option key={category.name} value={category.name}>
+                {category.name}
               </option>
             ))}
 
