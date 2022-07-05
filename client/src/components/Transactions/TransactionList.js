@@ -1,23 +1,23 @@
 import React, { useContext, useState } from "react";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
 import Balance from "./Balance";
 import Filters from "./Filters";
 import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
-import { useFilters, applyFilters } from "../customHooks/useFilters";
+import { useFilters, applyFilters } from "../../customHooks/useFilters";
 import Pagination from "./Pagination";
-import DoughnutChart from "./charts/Charts";
-import { usePaginate } from "../customHooks/usePaginate";
+import DoughnutChart from "../charts/Charts";
+import { usePaginate } from "../../customHooks/usePaginate";
 
 const TransactionList = () => {
   const { transactions, filters, user } = useContext(GlobalContext);
-  console.log("!!!!", user.transactions)
+
   //sort transactions by date
   const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
   const userOBJ = JSON.parse(localStorage.getItem("userData"));
 
   // const sortedTransactions = userOBJ.transactions // .sort(sortByDate);
-  const sortedTransactions = user.transactions // .sort(sortByDate);
+  const sortedTransactions = user.transactions.sort(sortByDate);
 
 
 

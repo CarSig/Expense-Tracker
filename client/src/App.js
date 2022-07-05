@@ -1,14 +1,14 @@
 
 import React, { useState, useContext, useEffect } from "react";
-import AddExpense from "./components/AddExpense";
+import AddExpense from "./components/Transactions/AddExpense";
 import NavBar from "./components/NavBar";
-import TransactionList from "./components/TransactionList";
+import TransactionList from "./components/Transactions/TransactionList";
 import { GlobalProvider, GlobalContext } from "./context/GlobalState";
-import Landing from "./components/Landing";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Settings from "./components/Settings";
-import Chart from "./components/Chart";
+import Landing from "./components/Login_Register_Landing/Landing";
+import Login from "./components/Login_Register_Landing/Login";
+import Register from "./components/Login_Register_Landing/Register";
+import Settings from "./components/Settings/Settings";
+
 
 const themes = ["dark", "light", "blue", "pink", "purpleYellow", "test"];
 
@@ -16,7 +16,6 @@ function App() {
 
   const { transactions, user, setUser, } = useContext(GlobalContext);
   const [route, setRoute] = useState("/");
-
 
 
   useEffect(() => {
@@ -72,7 +71,7 @@ function App() {
 
           {route === "/transactions" && <TransactionList />}
           {route === "/add" && <AddExpense />}
-          {route === "/chart" && <Chart />}
+
           {route === "/settings" && <Settings />}
 
 

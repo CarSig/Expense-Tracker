@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useFilters } from "../customHooks/useFilters";
+import { useFilters } from "../../customHooks/useFilters";
 import AddCategory from "./AddCategory";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
 
 const Filters = ({ hideFilters, setHideFilters }) => {
   const [filters, handleChangeFilter, activeFilter, toggleFilterActivity, resetFilters] = useFilters()

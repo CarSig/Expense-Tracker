@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 
 import { FiLogIn } from "react-icons/fi";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
 import axios from "axios";
 
 const Login = () => {
@@ -58,14 +58,11 @@ const Login = () => {
     if (data.data.user) {
 
       localStorage.setItem("token", data.data.user);
-      // localStorage.setItem("??", JSON.stringify(contextUser));
-      // console.log("??", JSON.stringify(contextUser));
+
 
       localStorage.setItem("userData", JSON.stringify(data.data.userData));
-      // console.log("userData!!", JSON.stringify(data.data.userData));
       setUser(data.data.userData);
-      const uo = JSON.parse(localStorage.getItem("userData"))
-      // console.log("from storage", JSON.stringify(uo.transactions));
+
       localStorage.setItem("username", payload.username);
       setUser(data.data.userData);
 

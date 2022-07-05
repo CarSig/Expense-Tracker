@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 // AiOutlineDelete;
 // AiFillDelete
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../../context/GlobalState";
 
 const Transaction = ({ transaction }) => {
   const { deleteTransaction } = useContext(GlobalContext);

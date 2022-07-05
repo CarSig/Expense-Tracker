@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import { useForm } from "../customHooks/useForm";
-import { GlobalContext } from "../context/GlobalState";
+import { useForm } from "../../customHooks/useForm";
+import { GlobalContext } from "../../context/GlobalState";
 
 
 

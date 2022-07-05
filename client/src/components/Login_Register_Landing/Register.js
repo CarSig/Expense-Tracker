@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { BsPersonPlusFill } from "react-icons/bs";
-import { useForm } from "../customHooks/useForm";
+import { useForm } from "../../customHooks/useForm";
 
 const Register = ({ setRoute }) => {
 
