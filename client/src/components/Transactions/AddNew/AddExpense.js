@@ -21,7 +21,7 @@ const AddExpense = ({ setRoute }) => {
   }
   return (
     <main className="container">
-      <pre>{route}</pre>
+
       <form >
         <h2 className="large text-primary">Add Expense</h2>
         <input type="number" name="amount" value={values.amount} placeholder="amount" className="my-1" onChange={handleChange} />

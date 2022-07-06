@@ -117,18 +117,18 @@ const Filters = ({ hideFilters, setHideFilters }) => {
           </div>
         )}
 
-        {
-          // if some filter is active, show button
 
-          <div>
-            <br />
-            <button className="btn" onClick={resetFilters}>Reset Filters</button>
-            <button className="btn btn-primary" onClick={closeFiltersWindow}>
-              {" "}
-              Hide Filters
-            </button>
-          </div>
-        }
+
+
+        <div>
+          <br />
+          <button className="btn" onClick={resetFilters}>Reset Filters</button>
+          <button className="btn btn-primary" onClick={closeFiltersWindow}>
+            {" "}
+            Hide Filters
+          </button>
+        </div>
+
       </form>
     </div >
   );

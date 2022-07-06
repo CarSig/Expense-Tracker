@@ -13,7 +13,7 @@ const Main = ({ scrollTheme }) => {
     const { signedIn, route, setRoute } = useContext(GlobalContext);
 
     useEffect(() => {
-        !signedIn && setRoute("/login");
+        (!signedIn && route !== "/register") && setRoute("/login");
     }, [route]);
 
 
@@ -28,7 +28,7 @@ const Main = ({ scrollTheme }) => {
                 <div className="btn" onClick={() => { scrollTheme("up"); }}>
                     {"Next" || "--End--"}
                 </div>
-
+                <p>change themes</p>
 
                 {signedIn && <div>
                     {route === "/" && <TransactionList />}

@@ -71,13 +71,14 @@ const Register = ({ setRoute }) => {
         <input type="submit" value="Submit" className="btn btn-primary" />
         {/*<button>Submit</button>*/}
       </form>
-      {signedUser === null && (
-        <div>
-          <p className="my-1">
-            Already have an account?
-          </p>
-        </div>
-      )}
+
+      <div>
+        <p className="my-1">
+          Already have an account?<h4 style={{ cursor: "pointer" }} onClick={(() => { setRoute("/login") })}> Login</h4>
+        </p>
+
+      </div>
+
     </section>
   );
 };
