@@ -7,7 +7,7 @@ Chart.register(...registerables);
 
 
 
-const Charts = ({ amountsArray, categoriesArray }) => {
+const Charts = ({ categoryAmounts }) => {
     const { categories } = useContext(GlobalContext);
     const [activeChart, setActiveChart] = useState("line");
 
@@ -16,11 +16,11 @@ const Charts = ({ amountsArray, categoriesArray }) => {
     }
 
     const data = {
-        labels: categoriesArray,
+        labels: categoryAmounts.map(category => category.category),
         datasets: [
             {
-                data: amountsArray,
-                backgroundColor: categories.map((category) => category.color)
+                data: categoryAmounts.map(category => category.amount),
+                backgroundColor: categoryAmounts.map((category) => category.color)
             }],
         options: {
             maintainAspectRatio: false

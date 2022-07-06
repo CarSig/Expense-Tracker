@@ -18,7 +18,7 @@ export const useForm = (initialValues) => {
     const newTransaction = {
       amount: +values.amount,
       newCategory: values.newCategory,
-      category: values.newCategory ? values.newCategory : values.newCategory === "select" ? "other" : values.category,
+      category: values.category === "select" ? "other" : values.newCategory ? values.newCategory : values.category,
       comment: values.comment,
       date: values.date,
 

@@ -6,11 +6,11 @@ import IncomeExpenses from "./IncomeExpenses";
 import Transaction from "./Transaction";
 import { useFilters, applyFilters } from "../../../customHooks/useFilters";
 import Pagination from "./Pagination";
-import DoughnutChart from "../../utils/Charts";
+import Charts from "../../utils/Charts";
 import { usePaginate } from "../../../customHooks/usePaginate";
 
 const TransactionList = () => {
-  const { transactions, filters, user } = useContext(GlobalContext);
+  const { transactions, filters, user, categories } = useContext(GlobalContext);
 
   //sort transactions by date
   const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
@@ -45,18 +45,18 @@ const TransactionList = () => {
   //TODO: refactor to separate components
   //-------CHARTS logic-----------
 
-  const categories = [...new Set(filteredTransactions.map((transaction) => transaction.category))];
+  // const categories1 = [...new Set(filteredTransactions.map((transaction) => transaction.category))];
 
 
-  const categoryTotals = categories.map((category) => {
-    return {
-      category: category,
-      total: filteredTransactions.reduce((total, transaction) => {
-        return transaction.category === category ? total + transaction.amount : total;
-      }, 0),
-    };
-  }
-  );
+  // const categoryTotals = categories1.map((category) => {
+  //   return {
+  //     category: category,
+  //     total: filteredTransactions.reduce((total, transaction) => {
+  //       return transaction.category === category ? total + transaction.amount : total;
+  //     }, 0),
+  //   };
+  // }
+  // );
 
   // function creates array for each category with sum of amounts
   const amounts = filteredTransactions.reduce((acc, item) => {
@@ -67,9 +67,18 @@ const TransactionList = () => {
     return acc;
   }, {});
 
+  // function that creates array with objects with category and amount
+  const categoryAmounts = Object.keys(amounts).map((key) => {
+    return {
+      category: key,
+      amount: amounts[key],
+      color: categories.find((category) => category.name === key).color
+    };
+  }
+  );
 
-  const amountsArray = Object.keys(amounts).map((key) => amounts[key]);
-  const categoriesArray = Object.keys(amounts).map((key) => key);
+
+
 
 
   return (
@@ -87,7 +96,7 @@ const TransactionList = () => {
 
       <br />
       <Filters hideFilters={hideFilters} setHideFilters={setHideFilters}></Filters>
-      <DoughnutChart amountsArray={amountsArray} categoriesArray={categoriesArray} />
+      <Charts categoryAmounts={categoryAmounts} />
 
       <button onClick={toggleTransactionsWindow}>{hideTransactions ? "Show Transacitons" : "Hide Transactions"}</button>
       <div className="transactions">
