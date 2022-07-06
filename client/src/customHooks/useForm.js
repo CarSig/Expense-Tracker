@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 
 import { GlobalContext } from "../context/GlobalState";
@@ -6,7 +6,7 @@ import { GlobalContext } from "../context/GlobalState";
 
 
 export const useForm = (initialValues) => {
-  const { addTransaction, user, setUser } = useContext(GlobalContext);
+  const {  user, setUser } = useContext(GlobalContext);
   const [values, setValues] = useState(initialValues);
 
   const handleChange = (e) => {

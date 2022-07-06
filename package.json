@@ -13,6 +13,7 @@
     "nodemon": "^2.0.16"
   },
   "scripts": {
+    "client-install": "npm install --prefix client",
     "dev-client": "nodemon client.js",
     "start": "node server.js",
     "client": "cd client && npm start",

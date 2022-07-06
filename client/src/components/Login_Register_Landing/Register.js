@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-
+import React from "react";
 import axios from "axios";
-
 import { BsPersonPlusFill } from "react-icons/bs";
 import { useForm } from "../../customHooks/useForm";
 
@@ -73,9 +71,10 @@ const Register = ({ setRoute }) => {
       </form>
 
       <div>
-        <p className="my-1">
-          Already have an account?<h4 style={{ cursor: "pointer" }} onClick={(() => { setRoute("/login") })}> Login</h4>
-        </p>
+        <div className="my-1">
+          <p> Already have an account?</p>
+          <h4 style={{ cursor: "pointer" }} onClick={(() => { setRoute("/login") })}> Login</h4>
+        </div>
 
       </div>
 

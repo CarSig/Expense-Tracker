@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const app = express();
 const routes = require("./routes/api");
+const path = require("path");
 
 dotenv.config({ path: "./config/config.env" });
 
@@ -41,5 +42,12 @@ app.use(morgan("tiny"));
 //routing
 app.use("/api", routes);
 
-//package json backup
-// "dev": "concurrently \"nodemon server.js\" \"npm run dev-client\"",
+
+//Serve static assets if in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}

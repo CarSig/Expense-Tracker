@@ -8,7 +8,7 @@ import axios from "axios";
 const Login = () => {
   const [values, setValues] = useState({ username: "", password: "" });
   const [invalidCredentials, setInvalidCredentials] = useState(false);
-  const { setUser, user, signedIn, setSignedIn, setRoute } = useContext(GlobalContext);
+  const { setUser, user, setSignedIn, setRoute } = useContext(GlobalContext);
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
@@ -70,9 +70,10 @@ const Login = () => {
         <input type="submit" value="Login" className="btn btn-primary" />
       </form>
 
-      <p className="my-1">
-        Don't have an account? <h4 style={{ cursor: "pointer" }} onClick={(() => { setRoute("/register") })}> Register</h4>
-      </p>
+      <div className="my-1">
+        <p>Don't have an account?</p>
+        <h4 style={{ cursor: "pointer" }} onClick={(() => { setRoute("/register") })}> Register</h4>
+      </div>
     </section>
   );
 };
