@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import AddExpense from "./components/Transactions/AddNew/AddExpense";
-import NavBar from "./components/NavBar";
 import TransactionList from "./components/Transactions/List/TransactionList";
-import { GlobalProvider, GlobalContext } from "./context/GlobalState";
-import Landing from "./components/Login_Register_Landing/Landing";
+import { GlobalContext } from "./context/GlobalState";
 import Login from "./components/Login_Register_Landing/Login";
 import Register from "./components/Login_Register_Landing/Register";
 import Settings from "./components/Settings/Settings";
@@ -14,7 +12,8 @@ const Main = ({ scrollTheme }) => {
 
     useEffect(() => {
         (!signedIn && route !== "/register") && setRoute("/login");
-    }, [route]);
+        // eslint-disable-next-line 
+    }, []);
 
 
     return (

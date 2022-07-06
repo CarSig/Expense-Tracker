@@ -137,56 +137,14 @@ exports.addNewTransaction = async (req, res) => {
 
 
 exports.deleteTransaction = async (req, res) => {
-    console.log("one")
-
     await User.findByIdAndUpdate(req.params.uId, { $pull: { transactions: req.params.tId } }, { new: true }).populate("transactions").then((data) => {
-   if(data){
-       console.log("data: ", data);
-       res.json(data);
-   }
+        if (data) {
+
+            res.json(data);
+        }
     });
 }
 
 
-    
-    
-    // (error, updatedData) => {
-    //     console.log(updatedData)
-    
-    //     if (error) {
-    //         console.log("error" + error);
-    //     } else {
-    //         console.log("data" + JSON.stringify(req.params));
-    //         console.log("data" + JSON.stringify(req.body));
-    //     }
-    // }
-    // ).populate("transactions");
-
-    // await Transaction.findByIdAndRemove(req.params.tId, (error, deletedItem) => {
-    //     console.log("three")
-    //     if (error) {
-    //         res.send(error);
-    //     }
-    //     return res.json(deletedItem);
-    // }
-    // ).populate("user");
-// }
 
 
-    // console.log("params: ", req.params.id);
-
-    // User.findByIdAndUpdate(req.params.id, { $pull: { transactions: { _id: req.params.id } } }, { new: true }, (error, updatedData) => {
-    //     if (error) { console.log("error" + error); } else {
-    //         res.status(200).json({ msg: "Transaction deleted!", updatedUser: updatedData })
-    //         console.log("updatedData: ", updatedData);
-    //     }
-    // }
-    // ).populate("transactions");
-// }
-
-
-
-
-
-
-// db.users.updateOne({ username: "usr" }, { $push: { transactions: transaction } })

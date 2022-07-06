@@ -1,15 +1,9 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
-
-
 
 export const useFilters = () => {
   const { filters, setFilters } = useContext(GlobalContext);
   const [activeFilter, setActiveFilter] = useState({ date: false, amount: false, category: false, comment: false, repeating: false });
-
-  const userOBJ = JSON.parse(localStorage.getItem("user"));
-  const sortByDate = (a, b) => (a.date < b.date ? 1 : -1);
-  const transactions = [1, 2, 3] || userOBJ.transactions.sort(sortByDate);
 
   const toggleFilterActivity = (e) => {
     setActiveFilter({ ...activeFilter, [e.target.name]: !activeFilter[e.target.name] });
