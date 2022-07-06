@@ -61,7 +61,10 @@ $spaceamounts: (1, 2, 3, 4, 5);
     }
     .delete {
       color: $danger-color;
-      background-color: rgba($bg-color, 0.3);
+
+      :hover {
+        color: lighten($color: $danger-color, $amount: 20);
+      }
     }
   }
 

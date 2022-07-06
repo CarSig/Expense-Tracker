@@ -9,12 +9,12 @@ export default (state, action) => {
     case "DELETE_TRANSACTION":
       return {
         ...state,
-        transactions: state.transactions.filter((transaction) => transaction._id !== action.payload),
+        transactions: state.user.transactions.filter((transaction) => transaction._id !== action.payload),
       };
     case "EDIT_TRANSACTION":
       return {
         ...state,
-        transactions: state.transactions.map((transaction) => (transaction._id === action.payload._id ? action.payload : transaction)),
+        transactions: state.user.transactions.map((transaction) => (transaction._id === action.payload._id ? action.payload : transaction)),
       };
     case "SET_FILTERS":
       return {

@@ -12,7 +12,7 @@ router.get("/users/new/:id", userController.findOneUser);
 router.get("/logged", userController.findOneUser);
 router.put("/users/:id", userController.updateUser);
 router.patch("/users/new/:id", userController.addNewTransaction);
-router.patch("/users/deleteTransaction/:id", userController.deleteTransaction);
+router.delete("/users/deleteTransaction/:uId/:tId", userController.deleteTransaction);
 router.get("/users", userController.findAllUsers);
 router.get("/context", userController.context);
 //TRANSACTION
